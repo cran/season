@@ -1,0 +1,54 @@
+\name{monthglm}
+\alias{monthglm}
+\alias{print.monthglm}
+\title{Fit a GLM with month}
+\description{Fit a generalized linear model with a categorical independent variable of month.}
+\usage{
+monthglm(formula,data,family=gaussian(),refmonth=1,offsetmonth=FALSE,
+offsetpop=NULL) %% ,plot=FALSE)
+\method{print}{monthglm}(x, ...)
+}
+\arguments{
+  \item{formula}{regression model formula, e.g., \code{y~x1+x2}, (do not
+    add month to the regression equation, it will be added
+    automatically).}
+  \item{data}{a data frame.}
+  \item{family}{a description of the error distribution and link
+    function to be used in the model (default=\code{gaussian()}). (See
+    \code{\link{family}} for details of family functions.).}
+  \item{refmonth}{reference month, must be between 1 and 12 (default=1
+    for January).}
+  \item{offsetmonth}{include an offset to account for the uneven number
+    of days in the month (TRUE/FALSE). Should be used for monthly counts
+    (with \code{family=poisson()}).}
+  \item{offsetpop}{include an offset for the population (optional), this
+    should be a variable in the data frame.}
+  \item{x}{Object of class \code{monthglm}}
+  \item{\dots}{further arguments passed to or from other methods.}
+}
+\details{Month is fitted as an independent variable as part of a
+  generalized linear model. Other independent variables can be added to
+  the right-hand side of \code{formula}.
+  
+  This model is useful for examining non-sinusoidal seasonal
+  patterns. For sinusoidal seasonal patterns see \code{\link{cosinor}}.
+  
+  The data frame should contain the integer months in a variable called
+  \sQuote{month}.
+}
+\value{
+  \item{call}{the original call to the monthglm function.} 
+  \item{fit}{GLM model.}
+  \item{fitted}{fitted values.}
+  \item{residuals}{residuals.}
+  \item{out}{details on the monthly estimates.}
+}
+\seealso{\code{summary.monthglm}, \code{plot.monthglm}}
+\references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.}
+\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\examples{
+data(CVD)
+mmodel<-monthglm(formula=cvd~1,data=CVD,family=poisson(),
+offsetpop=pop/100000,offsetmonth=TRUE)
+summary(mmodel)
+}

@@ -1,0 +1,18 @@
+citHeader("To cite package 'season' in publications use:")
+     
+     desc <- packageDescription("season")
+     year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+     vers <- paste("R package version", desc$Version)
+     
+     citEntry(entry="book",
+              title = "Analysing Seasonal Health Data",
+              author = personList(as.person("Adrian G Barnett"),
+                                  as.person("Annette J Dobson")),
+              publisher = "Springer",
+              address = "Berlin, Heidelberg",
+              year = "2009",
+     
+              textVersion =
+              paste("Adrian G Barnett, Annette J Dobson (2009)",
+                    " Analysing Seasonal Health Data.",
+                    " Springer. Berlin, Heidelberg.", sep=""))

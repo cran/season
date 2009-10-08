@@ -1,0 +1,142 @@
+##**********************************
+##** Seasonal decomposition macro **
+##**********************************
+##** Adrian Barnett               **
+##** April 2008                   **
+##**********************************
+### Inputs
+## data = data
+## cycles = cycles (e.g. in months, f=c(6,12))
+## tau = vector of smoothing parameters, tau[1] for trend, tau[2] for 1st seasonal parameter, tau[2] for 2nd seasonal parameter, etc
+## niters = total number of MCMC samples (default=1000)
+## burnin = number of MCMC samples discarded as a burn-in (default=500)
+## lambda = distance between observations (lambda=1/12 for monthly data)
+## div = divisor at which MCMC sample progress is reported (default=50)
+## monthly = TRUE for monthly data
+### Outputs
+## trend = mean trend and 95% confidence interval 
+## season = mean season and 95% confidence interval 
+## residuals = residuals (based on mean trend and season)
+## stats = estimated amplitude, phases and noise
+## chains = MCMC chain of variance estimates (std.error for overall sd(error), std.season for seasonal parts)
+##
+## assumes year and month exist in data; assumes no missing data
+`nscosinor` <-
+  function(data,response,cycles,niters=1000,burnin=500,tau,inits,
+           lambda=1/12,div=50,monthly=TRUE){
+    attach(data, warn.conflicts = FALSE)
+    names<-names(data)
+    yearyes<-sum(names=='year')
+    monthyes<-sum(names=='month')
+    if (yearyes<1|monthyes<1) {
+      stop("Data needs to contain numeric year and month variables")}
+    if (length(tau)!=length(cycles)+1) {
+      stop("Need to give a smoothing parameter (tau) for each cycle")}
+    if (sum(is.na(response))>0) {
+      stop("Missing data in the dependent variable not allowed")}
+    if (sum(cycles<=0)>0) {stop("Cycles cannot be <=0")}
+    if (burnin>niters) {
+      stop("Number of iterations must be greater than burn-in")}
+###  was    yrmon<-year+((month-1)/12)
+    yrmon<-data$year+((data$month-1)/12)  #  GUESS ONLY
+    n<-length(response);
+    k<-length(cycles);
+    kk<-2*(k+1);
+    vartheta<-sd(response) # Initial estimates of var theta
+    w<-vector(length=k,mode="numeric")
+    for (index in 1:k){ 
+      w[index]<-inits[k] # Initial estimate of lambda (w)
+    }
+    ## Empty chain matrices and assign initial values
+    ampchain<-matrix(0,niters+1,k)
+    phasechain<-matrix(0,niters+1,k)
+    alphachain<-array(0,c(kk,n+1,niters));
+    varthetachain<-matrix(0,niters+1)
+    lchain<-matrix(0,niters+1,k)
+    lchain[1,]<-w
+    varthetachain[1]<-vartheta
+    cmean<-rep(10,kk) # starting value for C_j
+    for (iter in 1:niters){ 
+      result<-kalfil(response,f=cycles,varthetachain[iter],
+                     lchain[iter,],tau=tau,lambda=lambda,cmean=cmean)
+      varthetachain[iter+1]<-result$vartheta 
+      lchain[iter+1,]<-result$w 
+      alphachain[,,iter]<-result$alpha 
+      ampchain[iter+1,]<-result$amp
+      phasechain[iter+1,]<-result$phase
+      cmean<-result$cmean
+      ## Output iteration progress 
+      if (iter%%div==0){cat("Iteration number",iter,"of",niters,"\n",sep=" ")}
+    }
+    ## Get mean and percentiles of alpha (trend and season)
+    trend<-as.data.frame(matrix(0,n,3))
+    season<-as.data.frame(matrix(0,n,3*k))
+    oseason<-as.data.frame(matrix(0,n,3))
+    names(trend)<-c('mean','lower','upper')
+    names(oseason)<-c('mean','lower','upper')
+    allseasons<-matrix(data=NA,ncol=niters-burnin+1,nrow=n)
+    snums<-((1:k)*2)+1
+    for (i in 1:n){ 
+      for (j in burnin:niters){ 
+        allseasons[i,j-burnin+1]<-sum(alphachain[snums,i,j])
+      }
+    }
+    alpha=0.05;
+    lprob=alpha/2;
+    uprob=1-(alpha/2);
+    lnum<-round((niters-burnin+1)*lprob);
+    unum<-round((niters-burnin+1)*uprob);
+    for (i in 1:n){ 
+      trend$mean[i]<-mean(alphachain[1,i,burnin:niters])
+      trend$lower[i]<-sum(as.numeric(rank(alphachain[1,i,burnin:niters])==lnum)*alphachain[1,i,burnin:niters])
+      trend$upper[i]<-sum(as.numeric(rank(alphachain[1,i,burnin:niters])==unum)*alphachain[1,i,burnin:niters])
+      for (j in 2:(k+1)){ 
+        snum<-((j-1)*2)+1
+        season[i,((j-1)*3)-2]<-mean(alphachain[snum,i,burnin:niters])
+        season[i,((j-1)*3)-1]<-sum(as.numeric(rank(alphachain[snum,i,burnin:niters])==lnum)*alphachain[snum,i,burnin:niters])
+        season[i,((j-1)*3)]<-sum(as.numeric(rank(alphachain[snum,i,burnin:niters])==unum)*alphachain[snum,i,burnin:niters])
+      }
+      ## overall season
+      oseason$mean[i]<-mean(allseasons[i,])
+      oseason$lower[i]<-sum(as.numeric(rank(allseasons[i,])==lnum)*allseasons[i,])
+      oseason$upper[i]<-sum(as.numeric(rank(allseasons[i,])==unum)*allseasons[i,])
+    }
+    names(season)<-rep(c('mean','lower','upper'),k)
+    ## Time
+    if (monthly==TRUE){time<-yrmon}
+    if (monthly!=TRUE){time<-1:n}
+    ## Calculated fitted values and residuals
+    fitted<-trend$mean+oseason$mean
+    res<-response-fitted # calculate the residuals
+    ## original call with defaults (see amer package)
+    ans <- as.list(match.call())
+    frmls <- formals(deparse(ans[[1]]))
+    add <- which(!(names(frmls) %in% names(ans)))
+    call<-as.call(c(ans, frmls[add]))
+    ## Returns
+    toret<-list()
+    toret$call<-call 
+    toret$time<-time
+    toret$trend<-trend
+    toret$season<-season
+    toret$oseason<-oseason
+    toret$fitted.values<-fitted
+    toret$residuals<-res
+    toret$n<-n
+    toret$chains$std.season<-matrix(data=NA,nrow=niters+1,ncol=k)
+    toret$chains$std.error<-coda::mcmc(data=varthetachain[burnin:(niters+1)],start=burnin)
+    toret$chains$phase<-matrix(data=NA,nrow=niters+1,ncol=k)
+    toret$chains$amplitude<-matrix(data=NA,nrow=niters+1,ncol=k)
+    for (i in 1:k){
+      toret$chains$std.season[,i]<-lchain[,i]
+      toret$chains$phase[,i]<-phasechain[,i]
+      toret$chains$amplitude[,i]<-ampchain[,i]
+    }
+    toret$chains$std.season<-coda::mcmc(data=toret$chains$std.season[burnin:(niters+1),],start=burnin)
+    toret$chains$phase<-coda::mcmc(data=toret$chains$phase[burnin:(niters+1),],start=burnin)
+    toret$chains$amplitude<-coda::mcmc(data=toret$chains$amplitude[burnin:(niters+1),],start=burnin)
+    toret$cycles<-cycles
+    class(toret)<-'nsCosinor'
+    return(toret)
+    detach(data)
+  }
