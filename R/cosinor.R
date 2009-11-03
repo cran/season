@@ -7,7 +7,7 @@
 # April 2009
 
 cosinor<-function(formula,date,data,family=gaussian(),
- alpha=0.05,cycles=1,rescheck=FALSE,type='daily',offset=NULL,text=TRUE){
+ alpha=0.05,cycles=1,rescheck=FALSE,type='daily',offsetmonth=FALSE,offsetpop=NULL,text=TRUE){
 # checks
  if (type!='daily'&type!='monthly'){stop("type must be daily or monthly")}
  attach(data,warn.conflicts=FALSE)
@@ -30,6 +30,14 @@ cosinor<-function(formula,date,data,family=gaussian(),
  data$cosw<-cos(frac*2*pi*cycles)
  data$sinw<-sin(frac*2*pi*cycles)
  newdata<-data.frame(cosw=data$cosw,sinw=data$sinw) # used later
+ poff=rep(1,nrow(data))
+ if(is.null(offsetpop)==FALSE){poff=offsetpop}
+ moff=rep(1,nrow(data))
+ if(offsetmonth==TRUE){
+    days<-flagleap(data=data,report=FALSE) # get the number of days in each month
+    moff=days$ndaysmonth/(365.25/12) # days per month divided by average month length
+ }
+ offset<-log(poff*moff)
 # generalized linear model
  model<-glm(f,data=data,family=family,offset=offset)
  detach(data)

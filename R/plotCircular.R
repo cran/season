@@ -2,7 +2,7 @@
 # circular plot
 # March 2009
 
-plotCircular<-function(radii1,radii2=NULL,spokes=NULL,scale=0.8,labels,stats=TRUE,dp=1,clockwise=TRUE,spoke.col='black',lines=FALSE, ...){
+plotCircular<-function(radii1,radii2=NULL,spokes=NULL,scale=0.8,labels,stats=TRUE,dp=1,clockwise=TRUE,spoke.col='black',lines=FALSE,centrecirc=0.03,...){
 op <- par(no.readonly = TRUE) # the whole list of settable par's.
 bins<-length(radii1)
 clockstart=pi/2 # default clock start at 12 o'clock
@@ -22,12 +22,16 @@ plot(circle,type='l',col='black',bty='n',yaxt='n',main='',xlab='',ylab='',xlim=c
 for (cheeseno in 1:bins){
    if(is.null(radii2)==TRUE){
     scaled1<-scale*radii1/max(radii1)
-    cheese<-matrix(nrow=103,ncol=2,data=0)
+    cheese<-matrix(nrow=102,ncol=2,data=0)
     start<-2*pi*((cheeseno-1)/bins)+clockstart
     frac<-1/100
-    for (i in 0:100){
-       cheese[i+2,1]<-mult*scaled1[cheeseno]*cos((2*pi*i*frac/bins)+start)
-       cheese[i+2,2]<-scaled1[cheeseno]*sin((2*pi*i*frac/bins)+start)
+    cheese[1,1]<-centrecirc*mult*cos((2*pi*frac/bins)+start)
+    cheese[1,2]<-centrecirc*sin((2*pi*frac/bins)+start)
+    cheese[102,1]<-centrecirc*mult*cos((2*pi*100*frac/bins)+start)
+    cheese[102,2]<-centrecirc*sin((2*pi*100*frac/bins)+start)
+    for (i in 1:100){
+       cheese[i+1,1]<-mult*scaled1[cheeseno]*cos((2*pi*i*frac/bins)+start)
+       cheese[i+1,2]<-scaled1[cheeseno]*sin((2*pi*i*frac/bins)+start)
     }
     polygon(cheese,density=0,angle=0,lty=1,lwd=1,border="black") 
   }
@@ -37,17 +41,26 @@ for (cheeseno in 1:bins){
     allradii<-c(radii1,radii2)
     scaled1<-scale*radii1/max(allradii)
     scaled2<-scale*radii2/max(allradii)
-    cheese1<-matrix(nrow=53,ncol=2,data=0)
-    cheese2<-matrix(nrow=53,ncol=2,data=0)
+    cheese1<-matrix(nrow=52,ncol=2,data=0)
+    cheese2<-matrix(nrow=52,ncol=2,data=0)
     start<-2*pi*((cheeseno-1)/bins)+clockstart
     frac<-1/100
-    for (i in 0:50){
+# centrecirc: do not start at c(0,0) to prevent a dense block
+    cheese1[1,1]<-centrecirc*mult*cos((2*pi*0*frac/bins)+start)
+    cheese1[1,2]<-centrecirc*sin((2*pi*0*frac/bins)+start)
+    cheese1[52,1]<-centrecirc*mult*cos((2*pi*51*frac/bins)+start)
+    cheese1[52,2]<-centrecirc*sin((2*pi*51*frac/bins)+start)
+    for (i in 1:50){
        cheese1[i+1,1]<-mult*scaled1[cheeseno]*cos((2*pi*i*frac/bins)+start)
        cheese1[i+1,2]<-scaled1[cheeseno]*sin((2*pi*i*frac/bins)+start)
     }
     polygon(cheese1,density=0,angle=0,lty=1,lwd=1,border="black") 
  # 2nd pattern
     start<-2*pi*((cheeseno-1)/bins)+clockstart
+    cheese2[1,1]<-centrecirc*mult*cos((2*pi*50*frac/bins)+start)
+    cheese2[1,2]<-centrecirc*sin((2*pi*50*frac/bins)+start)
+    cheese2[52,1]<-centrecirc*mult*cos((2*pi*100*frac/bins)+start)
+    cheese2[52,2]<-centrecirc*sin((2*pi*100*frac/bins)+start)
     for (i in 51:100){
        cheese2[i+1-50,1]<-mult*scaled2[cheeseno]*cos((2*pi*i*frac/bins)+start)
        cheese2[i+1-50,2]<-scaled2[cheeseno]*sin((2*pi*i*frac/bins)+start)
@@ -80,6 +93,8 @@ if (is.null(spokes)==FALSE){
    halfcheese<-(2*pi)/(bins*2);
    for (cheeseno in 1:bins){
       spokes<-matrix(data=0,nrow=2,ncol=2)
+      spokes[1,1]<-centrecirc*mult*scaleds[cheeseno]*cos((2*pi*cheeseno/bins)+start+half)
+      spokes[1,2]<-centrecirc*scaleds[cheeseno]*sin((2*pi*cheeseno/bins)+start+half)
       spokes[2,1]<-mult*scaleds[cheeseno]*cos((2*pi*cheeseno/bins)+start+half)
       spokes[2,2]<-scaleds[cheeseno]*sin((2*pi*cheeseno/bins)+start+half)
       lines(spokes,pch=0,type='l',col=spoke.col,lty=1,lwd=1.5) 
@@ -90,6 +105,8 @@ if (lines==TRUE){
    halfcheese<-(2*pi)/(bins*2);
    for (cheeseno in 1:bins){
       breaks<-matrix(data=0,nrow=2,ncol=2)
+      breaks[1,1]<-centrecirc*cos((2*pi*cheeseno/bins)+start)
+      breaks[1,2]<-centrecirc*sin((2*pi*cheeseno/bins)+start)
       breaks[2,1]<-cos((2*pi*cheeseno/bins)+start)
       breaks[2,2]<-sin((2*pi*cheeseno/bins)+start)
       lines(breaks,pch=0,type='l',lty=3,lwd=1) 

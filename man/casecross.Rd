@@ -1,7 +1,5 @@
 \name{casecross}
 \alias{casecross}
-%%\alias{print.casecross}
-%%\alias{summary.casecross}
 \title{Case--crossover analysis to control for seasonality}
 \description{Fits a time-stratified case--crossover to time series data.}
 \usage{casecross(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,
@@ -11,7 +9,7 @@ usefinalwindow=FALSE,matchconf='',confrange=0,stratamonth=FALSE)}
   \item{data}{data set as a data frame.}
   \item{exclusion}{exclusion period (in days) around cases, set to 2 (default). Must be positive and smaller than \code{stratalength}.}
   \item{stratalength}{length of stratum in days, set to 28 (default).}
-  \item{matchdow}{match case and control days using day of the week (TRUE/default=FALSE). This matching is in addition to the strata matching. Assumes there is an integer day of the week variable in the data called \sQuote{dow}.}
+  \item{matchdow}{match case and control days using day of the week (TRUE/default=FALSE). This matching is in addition to the strata matching.}
   \item{usefinalwindow}{use the last stratum in the time series, which is likely to contain less days than all the other strata (TRUE/default=FALSE).}
   \item{matchconf}{match case and control days using an important confounder (optional; must be in quotes). \code{matchconf} is the variable to match on. This matching is in addition to the strata matching.}
   \item{confrange}{range of the confounder within which case and control days will be treated as a match (optional). Range = \code{matchconf} (on case day) \eqn{+/-} \code{confrange}.}
@@ -37,7 +35,7 @@ usefinalwindow=FALSE,matchconf='',confrange=0,stratamonth=FALSE)}
 
   The method uses conditional logistic regression (see \code{\link{coxph}} and so the parameter estimates are odds ratios.)
 
-  The code assumes that the day of week variable is called \sQuote{dow}, and that the data frame contains a date variable (in \code{\link{Date}} format) called \sQuote{date}.}
+  The code assumes that the data frame contains a date variable (in \code{\link{Date}} format) called \sQuote{date}.}
 \value{
   \item{call}{the original call to the casecross function.} 
   \item{c.model}{conditional logistic regression model of class \code{coxph}.}
@@ -49,15 +47,15 @@ usefinalwindow=FALSE,matchconf='',confrange=0,stratamonth=FALSE)}
 
   Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.}
 \seealso{\code{summary.casecross}, \code{coxph}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 # cardiovascular disease data
 data(CVDdaily)
 # Effect of ozone on CVD death
-\dontrun{model1<-casecross(cvd~o3tmean+tmpd+Mon+Tue+Wed+Thu+Fri+Sat,data=CVDdaily)}
+model1<-casecross(cvd~o3mean+tmpd+Mon+Tue+Wed+Thu+Fri+Sat,data=CVDdaily)
 # match on day of the week
-\dontrun{model2<-casecross(cvd~o3tmean+tmpd,matchdow=TRUE,data=CVDdaily)}
+model2<-casecross(cvd~o3mean+tmpd,matchdow=TRUE,data=CVDdaily)
 # match on temperature to within a degree
-\dontrun{model3<-casecross(cvd~o3tmean+Mon+Tue+Wed+Thu+Fri+Sat,data=CVDdaily,
-matchconf='tmpd',confrange=1)}
+model3<-casecross(cvd~o3mean+Mon+Tue+Wed+Thu+Fri+Sat,data=CVDdaily,
+matchconf='tmpd',confrange=1)
 }

@@ -18,8 +18,9 @@ div=50,monthly=TRUE)
   \item{cycles}{vector of cycles in units of time, e.g., for a six and twelve month pattern \code{cycles=c(6,12)}.}
   \item{niters}{total number of MCMC samples (default=1000).}
   \item{burnin}{number of MCMC samples discarded as a burn-in (default=500).}
-  \item{tau}{vector of smoothing parameters, tau[1] for trend, tau[2] for 1st seasonal parameter, tau[3] for 2nd seasonal parameter, etc.}
-  \item{inits}{vector of initial values for the MCMC chain.}
+  \item{tau}{vector of smoothing parameters, tau[1] for trend, tau[2] for 1st seasonal parameter, tau[3] for 2nd seasonal parameter, etc. Larger values of tau allow more change between observations and hence a
+greater potential flexibility in the trend and season.}
+  \item{inits}{vector of initial values for the MCMC chain. Initial values should be given for each seasonal cycle.}
   \item{lambda}{distance between observations (lambda=1/12 for monthly data, default).}
   \item{div}{divisor at which MCMC sample progress is reported (default=50).}
   \item{monthly}{TRUE for monthly data.}
@@ -55,13 +56,13 @@ Returns an object of class \dQuote{nsCosinor} with the following parts:
 \item{fitted}{fitted values, based on trend + season(s).} 
 \item{residuals}{residuals based on mean trend and season(s).}
 \item{n}{the length of the series.}
-\item{chains}{MCMC chains (of class \code{\link[coda]{mcmc}}) of variance estimates: standard error for overall noise (std.error), phase, amplitude, standard error for season(s) (std.season).}
+\item{chains}{MCMC chains (of class \code{\link{mcmc}}) of variance estimates: standard error for overall noise (std.error), phase, amplitude, standard error for season(s) (std.season).}
 \item{cycles}{vector of cycles in units of time.}
 }
 \references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.
 
 Barnett, A.G., Dobson, A.J. (2004) Estimating trends and seasonality in coronary heart disease \emph{Statistics in Medicine}. 23(22) 3505--23.}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \seealso{\code{plot.nsCosinor}, \code{summary.nsCosinor}}
 \examples{
 data(CVD)

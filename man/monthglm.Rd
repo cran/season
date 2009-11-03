@@ -5,7 +5,7 @@
 \description{Fit a generalized linear model with a categorical independent variable of month.}
 \usage{
 monthglm(formula,data,family=gaussian(),refmonth=1,offsetmonth=FALSE,
-offsetpop=NULL) %% ,plot=FALSE)
+offsetpop=NULL) 
 \method{print}{monthglm}(x, ...)
 }
 \arguments{
@@ -22,7 +22,7 @@ offsetpop=NULL) %% ,plot=FALSE)
     of days in the month (TRUE/FALSE). Should be used for monthly counts
     (with \code{family=poisson()}).}
   \item{offsetpop}{include an offset for the population (optional), this
-    should be a variable in the data frame.}
+    should be a variable in the data frame. Do not log-transform the offset as the log-transform is applied by the function.}
   \item{x}{Object of class \code{monthglm}}
   \item{\dots}{further arguments passed to or from other methods.}
 }
@@ -45,10 +45,9 @@ offsetpop=NULL) %% ,plot=FALSE)
 }
 \seealso{\code{summary.monthglm}, \code{plot.monthglm}}
 \references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 data(CVD)
 mmodel<-monthglm(formula=cvd~1,data=CVD,family=poisson(),
 offsetpop=pop/100000,offsetmonth=TRUE)
-summary(mmodel)
 }

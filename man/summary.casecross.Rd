@@ -12,5 +12,5 @@
 }
 \details{Show the number of control days, the average number of control days per case days and the parameter estimates.}
 \seealso{\code{casecross}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 

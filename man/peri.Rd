@@ -15,7 +15,7 @@
   \item{amp}{amplitude periodogram.}
   \item{phase}{phase periodogram.}
 }
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 data(CVD)
 peri(CVD$cvd)

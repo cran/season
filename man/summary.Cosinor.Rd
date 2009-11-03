@@ -1,5 +1,4 @@
 \name{summary.Cosinor}
-%%\alias{cosinor}
 \alias{summary.Cosinor}
 \alias{print.summary.Cosinor}
 \title{Summary for a cosinor}
@@ -25,6 +24,6 @@
 }
 \details{Summarises the sinusoidal seasonal pattern and tests whether there is statistically significant seasonality (assuming a smooth sinusoidal pattern). The amplitude describes the average height of the sinusoid, and the phase describes the location of the peak. The scale of the amplitude depends on the link function. For logistic regression the amplitude is given on a probability scale. For Poisson regression the amplitude is given on an absolute scale.}
 \seealso{\code{cosinor}, \code{plot.Cosinor}, \code{invyrfraction}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 
 

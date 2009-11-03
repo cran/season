@@ -10,7 +10,7 @@
   \item{\dots}{additional arguments to \code{plot}}
 }
 \details{This circular plot can be useful for estimates of an annual seasonal pattern. Darker shades of grey correspond to larger numbers.} 
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 plotCircle(months=seq(1,12,1),dp=0)
 }

@@ -12,5 +12,5 @@
 }
 \details{Prints out the model call, number of MCMC samples, sample size and residual summary statistics.}
 \seealso{\code{nscosinor}, \code{summary.nsCosinor}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 

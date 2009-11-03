@@ -30,6 +30,6 @@
   month). If Poisson regression was used then the estimates are shown as
   rate ratios. If logistic regression was used then the estimates are
   shown as oddsratios.}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 
 

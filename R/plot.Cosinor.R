@@ -24,7 +24,9 @@ plot.Cosinor<-function(x,...){
         points(x$date[o],x$fitted[o],pch=19)
      }
      if (x$call$type=='daily'){
-        axis(side=1)
+        years<-as.numeric(names(table(format(x$date,'%Y'))))
+        firsts<-as.numeric(ISOdate(month=1,day=1,year=years))/(24*60*60)
+        axis(side=1,at=firsts,labels=years)
         rug(x$date[o])
      }
   }
@@ -37,7 +39,9 @@ plot.Cosinor<-function(x,...){
         points(x$date[o],x$fitted[o],pch=19)
      }
      if (x$call$type=='daily'){
-        axis(side=1)
+        years<-as.numeric(names(table(format(x$date,'%Y'))))
+        firsts<-as.numeric(ISOdate(month=1,day=1,year=years))/(24*60*60)
+        axis(side=1,at=firsts,labels=years)
         rug(x$date[o])
      }
   }

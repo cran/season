@@ -12,5 +12,5 @@
 }
 \details{Uses \code{print.glm}.}
 \seealso{\code{cosinor}, \code{summary.Cosinor}, \code{glm}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 

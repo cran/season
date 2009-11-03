@@ -31,7 +31,9 @@
     if (yearyes<1|monthyes<1) {
       stop("Data needs to contain numeric year and month variables")}
     if (length(tau)!=length(cycles)+1) {
-      stop("Need to give a smoothing parameter (tau) for each cycle")}
+      stop("Need to give a smoothing parameter (tau) for each cycle, plus one for the trend")}
+    if (length(inits)!=length(cycles)) {
+      stop("Need to give an initial value (inits) for each cycle")}
     if (sum(is.na(response))>0) {
       stop("Missing data in the dependent variable not allowed")}
     if (sum(cycles<=0)>0) {stop("Cycles cannot be <=0")}

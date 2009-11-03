@@ -11,7 +11,7 @@
   \item{\dots}{additional arguments passed to the plot.}
 }
 \seealso{\code{monthglm}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 data(CVD)
 mmodel<-monthglm(formula=cvd~1,data=CVD,family=poisson(),

@@ -12,4 +12,5 @@
 }
 \details{The code produces two plots: a) residual checks, b) the season(s) and trend estimates.}
 \seealso{\code{nscosinor}, \code{seasrescheck}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
+

@@ -1,7 +1,7 @@
 \name{season-internal}
 
 %%\name{cipolygon-internal}
-\alias{cipolygon}
+%%%%%\alias{cipolygon}
 %%\title{Function to draw CI polygon}
 % \description{Internal function to draw a confidence interval for multiple times as a grey area. For internal use only.}
 % \usage{cipolygon(time,lower,upper)}
@@ -13,7 +13,7 @@
 % \author{Adrian Barnett \email{a.barnett@qut.edu.au}}
 
 %%\name{flagleap}
-\alias{flagleap}
+%%%%%\alias{flagleap}
 %%\title{Count the number of days in the month}
 % \description{Counts the number of days per month given a range of dates. Used to adjust monthly count data for the at-risk time period. For internal use only.}
 % \usage{flagleap(data,report=TRUE)}
@@ -35,7 +35,7 @@
 % }
 
 %%\name{kalfil-internal}
-\alias{kalfil}
+%%%%%\alias{kalfil}
 %%\title{Forward and backward sweep of the Kalman filter}
 % \description{Internal function to do a forward and backward sweep of the Kalman filter, used by \code{nscosinor}. For internal use only.}
 % \usage{kalfil(data,f,vartheta,w,tau,lambda,cmean)}
@@ -51,7 +51,7 @@
 % \author{Adrian Barnett \email{a.barnett@qut.edu.au}}
 
 % \name{nochars-internal}
-\alias{nochars}
+%%%%%\alias{nochars}
 %%\title{Remove letters and characters from a string}
 % \description{Remove letters and characters from a string to leave only numbers. Removes all letters (upper and lower case) and the characters \dQuote{.}, \dQuote{(} and \dQuote{)}. For internal use only.}
 % \usage{nochars(text)}
@@ -63,7 +63,7 @@
 % nochars('adrian.(0)')
 % }
 % \name{rinvgamma-internal}
-\alias{rinvgamma}
+%%%%%\alias{rinvgamma}
 % %%\title{Random inverse gamma distribution}
 % \description{Internal function to simulate a value from an inverse Gamma distribution, used by \code{nscosinor}. See the MCMCpack library. For internal use only.}
 % \usage{rinvgamma(n,shape,scale=1)}

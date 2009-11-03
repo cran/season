@@ -13,7 +13,8 @@
     \item{\code{cvd}}{daily number of CVD deaths}
     \item{\code{dow}}{day of the week (character)}
     \item{\code{tmpd}}{daily mean temperature (degrees Fahrenheit)}
-    \item{\code{o3tmean}}{daily trimmed for ozone (parts per billion)}
+    \item{\code{o3mean}}{daily mean ozone (parts per billion)}
+    \item{\code{o3tmean}}{daily trimmed mean ozone (parts per billion)}
     \item{\code{Mon}}{indicator variable for Monday}
     \item{\code{Tue}}{indicator variable for Tuesday}
     \item{\code{Wed}}{indicator variable for Wednesday}

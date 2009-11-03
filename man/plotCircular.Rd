@@ -3,7 +3,7 @@
 \title{Circular plot}
 \description{A circular plot useful for visualising monthly or weekly data.}
 \usage{plotCircular(radii1,radii2=NULL,spokes=NULL,scale=0.8,labels,
-stats=TRUE,dp=1,clockwise=TRUE,spoke.col='black',lines=FALSE,\dots)
+stats=TRUE,dp=1,clockwise=TRUE,spoke.col='black',lines=FALSE,centrecirc=0.03,\dots)
 }
 \arguments{
   \item{radii1}{variable to plot, the radii of the segments (or petals) are proportional to this variable.}
@@ -16,11 +16,12 @@ stats=TRUE,dp=1,clockwise=TRUE,spoke.col='black',lines=FALSE,\dots)
   \item{clockwise}{plot in a clockwise direction, default=TRUE.}
   \item{spoke.col}{spoke colour, default=black.}
   \item{lines}{add dotted lines to separate petals, default=FALSE.}
+  \item{centrecirc}{controls the size of the circle at the centre of the plot, default=0.03.}
   \item{\dots}{additional arguments to \code{plot}}
 }
 \details{A circular plot can be useful for spotting the shape of the seasonal pattern. This function can be used to plot any circular patterns, e.g., weekly or monthly. The number of segments will be the length of the variable \code{radii1}.}
 \references{Fisher, N.I. (1993) \emph{Statistical Analysis of Circular Data}. Cambridge University Press, Cambridge.}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 # months (dummy data)
 plotCircular(radii1=seq(1,12,1),scale=0.7,labels=month.abb,dp=0)

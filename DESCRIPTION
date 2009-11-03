@@ -1,8 +1,8 @@
 Package: season
 Type: Package
 Title: Seasonal analysis of health data
-Version: 0.2-2
-Date: 2009-10-08
+Version: 0.2-3
+Date: 2009-11-03
 Author: Adrian Barnett <a.barnett@qut.edu.au>, Peter Baker
         <p.baker1@uq.edu.au>
 Maintainer: Adrian Barnett <a.barnett@qut.edu.au>, Peter Baker
@@ -12,6 +12,6 @@ Description: Routines for the seasonal analysis of health data,
         plotting functions and residual checks.
 Depends: lattice, MASS, mgcv, survival, coda
 License: GPL (>= 3)
-Packaged: 2009-10-20 12:49:54 UTC; pete
+Packaged: 2009-12-16 14:51:09 UTC; pete
 Repository: CRAN
-Date/Publication: 2009-10-20 19:31:32
+Date/Publication: 2009-12-16 15:08:46

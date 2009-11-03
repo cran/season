@@ -12,7 +12,7 @@
 \value{
   \item{yrfrac}{Fraction of the year.}
 }
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 # create fractions for the start, middle and end of the year
 date<-as.Date(c(0,181,364),origin='1991-01-01')

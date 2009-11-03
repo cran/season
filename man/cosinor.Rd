@@ -2,8 +2,8 @@
 \alias{cosinor}
 \title{Cosinor regression model for detecting seasonality}
 \description{Fits a cosinor model as part of a generalized linear model.}
-\usage{cosinor(formula,date,data,family=gaussian(),alpha=0.05,
-cycles=1,rescheck=FALSE,type='daily',offset=NULL,text=TRUE)}  %% plot=FALSE,
+\usage{cosinor(formula,date,data,family=gaussian(),alpha=0.05,cycles=1,
+rescheck=FALSE,type='daily',offsetmonth=FALSE,offsetpop=NULL,text=TRUE)}  %% plot=FALSE,
 \arguments{
   \item{formula}{regression formula.}
   \item{date}{a date variable if type=\dQuote{daily}, or an integer
@@ -18,7 +18,11 @@ cycles=1,rescheck=FALSE,type='daily',offset=NULL,text=TRUE)}  %% plot=FALSE,
     \code{\link{seasrescheck}}.}
   \item{type}{\dQuote{daily} for daily data (default), or
     \dQuote{monthly} for monthly data.}
-  \item{offset}{offset to account for population size, set to NULL (default).}
+  \item{offsetmonth}{include an offset to account for the uneven number
+    of days in the month (TRUE/FALSE). Should be used for monthly counts
+    (with \code{family=poisson()}).}
+  \item{offsetpop}{include an offset for the population (optional), this
+    should be a variable in the data frame.}
   \item{text}{add explanatory text to the returned phase value (TRUE) or
     return a number (FALSE). Passed to the \code{invyrfraction}
     function.}
@@ -44,13 +48,14 @@ Returns an object of class \dQuote{Cosinor} with the following parts:
 }
 \references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal
     Health Data}. Springer.}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\seealso{\code{summary.Cosinor}, \code{plot.Cosinor}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 ## cardiovascular disease data (offset based on number of days in... 
 ## ...the month scaled to an average month length)
 data(CVD)
 res<-cosinor(cvd~1,date=month,data=CVD,type='monthly',
-family=poisson(),offset=ndaysmonth/(365.25/12))
+family=poisson(),offsetmonth=TRUE)
 summary(res)
 # stillbirth data
 data(stillbirth)

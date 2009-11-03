@@ -37,5 +37,5 @@ the non-stationarity. This is because a larger standard deviation means
 more change over time.
 }
 \seealso{\code{nscosinor}, \code{plot.nsCosinor}}
-\author{Adrian Barnett \email{a.barnett@qut.edu.au}}
+\author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 
