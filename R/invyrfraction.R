@@ -11,17 +11,15 @@ invyrfraction<-function(frac,type='daily',text=TRUE){
      yrlength<-365.25; 
      day<-(frac*yrlength)+1;
      day=day-(365*as.numeric(day>365)); # avoid values > 365
-     day=max(day,1); # avoid values < 1
+     day=pmax(day,1); # avoid values < 1
      date<-strptime(day,'%j');
      day<-as.numeric(format(date,'%d')); # Day of the month as decimal number (01–31)
      month<-format(date,'%B'); # Month name
      if (text==TRUE){daym<-paste('Month =',month,', day =',day)}
      if (text==FALSE){
         monthnum<-as.numeric(format(date,'%m')); # Month number
-        if (any(c(1,3,5,7,8,10,12)==monthnum)){mnthlength=31}
-        if (any(c(4,6,9,11)==monthnum)){mnthlength=30}
-        if (monthnum==2){mnthlength=29} # assume leap year
-        daym<-monthnum+((day-1)/mnthlength)
+        mnthlength<-c(31,28.25,31,30,31,30,31,31,30,31,30,31)
+        daym<-monthnum+((day-1)/mnthlength[monthnum])
      } # 
   }
   if (type=='monthly'){

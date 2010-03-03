@@ -3,14 +3,19 @@
 ## option to add offset to control for uneven number of days
 ## March 2009
 
-monthglm<-function(formula,data,family=gaussian(),refmonth=1,
+monthglm<-function(formula,data,family=gaussian(),refmonth=1,month='month',year='year',
                    offsetmonth=FALSE,offsetpop=NULL){
   attach(data,warn.conflicts=FALSE)
-  ## checks
+# Assign month and year variables
   n<-names(data)
-  if (any(n=='month')==FALSE){stop("data set must contain months as integer using a variable called 'month'")}
-### was  if (is.integer(month)==FALSE&is.numeric(month)==FALSE){stop("month variable must be an integer or numeric")}
-    if (is.integer(data$month)==FALSE&is.numeric(data$month)==FALSE){stop("month variable must be an integer or numeric")}  # GUESS ONLY
+  month.index<-n %in% month
+  month <- data[,month.index]
+  year.index<-n %in% year
+  year<- data[,year.index]
+  ## checks
+  if (is.integer(month)==FALSE&is.numeric(month)==FALSE){stop("month variable (",month,") must be an integer or numeric")}
+  if (is.numeric(year)==FALSE){stop("year variable (",year,") must be a 4 digit year")}
+  if (any(nchar(year)!=4)==TRUE){stop("year variable (",year,") must be a 4 digit year")}
   if (refmonth<1|refmonth>12){stop("Reference month must be between 1 and 12")}
   ## original call with defaults (see amer package)
   ans <- as.list(match.call())
@@ -19,7 +24,7 @@ monthglm<-function(formula,data,family=gaussian(),refmonth=1,
   call<-as.call(c(ans, frmls[add]))
   ## Transform month numbers to names
 ### was  months.u<-as.factor(month)
-  months.u<-as.factor(data$month)  # GUESS ONLY 
+  months.u<-as.factor(data$month)  
   nums<-as.numeric(nochars(levels(months.u))) # Month numbers
   levels(months.u)[nums]<-month.abb[nums]
   months<-relevel(months.u,ref=month.abb[refmonth]) # set reference month
@@ -30,10 +35,11 @@ monthglm<-function(formula,data,family=gaussian(),refmonth=1,
   index<-sum((names(data)==dep)*(1:ncol(data)))
   slimdata<-data[,index]
   days<-flagleap(data=data,report=FALSE) # get the number of days in each month
-  if(is.null(offsetpop)==FALSE){poff=offsetpop} else{poff=1}
-  if(offsetmonth==TRUE){moff=days$ndaysmonth/(365.25/12)} else{moff=1} # days per month divided by average month length
+  l<-nrow(data)
+  if(is.null(offsetpop)==FALSE){poff=offsetpop} else{poff=rep(1,l)}
+  if(offsetmonth==TRUE){moff=days$ndaysmonth/(365.25/12)} else{moff=rep(1,l)} # days per month divided by average month length
 ###  data$off<-log(poff*moff)
-  off<-log(poff*moff)  #  GUESS ONLY
+  off<-log(poff*moff)  # 
   fit<-glm(formula=f,data=data,family=family,offset=off)
   detach(data)
   ## return

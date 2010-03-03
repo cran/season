@@ -13,6 +13,6 @@
 # (use an offset of the scaled number of days in a month)
 data(CVD)
 model<-cosinor(cvd~1,date=month,data=CVD,type='monthly',
-family=poisson(),offsetmonth=ndaysmonth/(365.25/12))
+family=poisson(),offsetmonth=TRUE) ##ndaysmonth/(365.25/12))
 seasrescheck(resid(model))
 }

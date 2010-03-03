@@ -1,9 +1,9 @@
-\name{monthplot}
-\alias{monthplot}
+\name{plotMonth}
+\alias{plotMonth}
 \title{Plot results by month}
 \description{Plots results by month.}
 \usage{
-monthplot(data,resp,panels=12,\dots)
+plotMonth(data,resp,panels=12,\dots)
 }
 \arguments{
   \item{data}{a data frame.}
@@ -16,5 +16,5 @@ monthplot(data,resp,panels=12,\dots)
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 data(CVD)
-monthplot(data=CVD,resp=cvd,panels=12)
+plotMonth(data=CVD,resp=cvd,panels=12)
 }

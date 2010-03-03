@@ -13,7 +13,7 @@ yrfraction<-function(date,type='daily'){
     yrfrac<-(day-1)/yrlength;
   }
   if (type=='monthly'){
-    if (max(date)>12|max(date)<1){stop("Date variable for monthly data must be month integer (1 to 12)")} 
+    if (max(date)>12|min(date)<1){stop("Date variable for monthly data must be month integer (1 to 12)")} 
     yrfrac<-(date-1)/12;
   }
   return(yrfrac)

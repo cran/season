@@ -1,9 +1,9 @@
-# monthplot.R
+# plotMonth.R
 # function to plot monthly results by month
 # assumes the data are in order
 # assumes there are numeric variables for month and year
 
-monthplot<-function(data,resp,panels=12, ...){
+plotMonth<-function(data,resp,panels=12, ...){
   cat("Using this one!!!\n")
   if (panels!=1&panels!=12){stop("panels must be 1 or 12")}
   op <- par(no.readonly = TRUE) # the whole list of settable par's.

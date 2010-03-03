@@ -2,10 +2,11 @@
 \alias{monthglm}
 \alias{print.monthglm}
 \title{Fit a GLM with month}
-\description{Fit a generalized linear model with a categorical independent variable of month.}
+\description{Fit a generalized linear model with a categorical
+  independent variable of month.}
 \usage{
-monthglm(formula,data,family=gaussian(),refmonth=1,offsetmonth=FALSE,
-offsetpop=NULL) 
+monthglm(formula,data,family=gaussian(),refmonth=1,
+         month = "month", year = "year", offsetmonth=FALSE,offsetpop=NULL) 
 \method{print}{monthglm}(x, ...)
 }
 \arguments{
@@ -18,11 +19,16 @@ offsetpop=NULL)
     \code{\link{family}} for details of family functions.).}
   \item{refmonth}{reference month, must be between 1 and 12 (default=1
     for January).}
+  \item{month}{name of the numeric integer representing month
+    (default=\sQuote{month}).}
+  \item{year}{name of the 4 digit number representing year
+    (default=\sQuote{year}.)}
   \item{offsetmonth}{include an offset to account for the uneven number
     of days in the month (TRUE/FALSE). Should be used for monthly counts
     (with \code{family=poisson()}).}
   \item{offsetpop}{include an offset for the population (optional), this
-    should be a variable in the data frame. Do not log-transform the offset as the log-transform is applied by the function.}
+    should be a variable in the data frame. Do not log-transform the
+    offset as the log-transform is applied by the function.}
   \item{x}{Object of class \code{monthglm}}
   \item{\dots}{further arguments passed to or from other methods.}
 }
@@ -33,8 +39,7 @@ offsetpop=NULL)
   This model is useful for examining non-sinusoidal seasonal
   patterns. For sinusoidal seasonal patterns see \code{\link{cosinor}}.
   
-  The data frame should contain the integer months in a variable called
-  \sQuote{month}.
+  The data frame should contain the integer months and the year as a 4 digit number. These are used to calculate the number of days in each month accounting for leap years.
 }
 \value{
   \item{call}{the original call to the monthglm function.} 
@@ -50,4 +55,5 @@ offsetpop=NULL)
 data(CVD)
 mmodel<-monthglm(formula=cvd~1,data=CVD,family=poisson(),
 offsetpop=pop/100000,offsetmonth=TRUE)
+summary(mmodel)
 }
