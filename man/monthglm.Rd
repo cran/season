@@ -6,7 +6,7 @@
   independent variable of month.}
 \usage{
 monthglm(formula,data,family=gaussian(),refmonth=1,
-         month = "month", year = "year", offsetmonth=FALSE,offsetpop=NULL) 
+         offsetmonth=FALSE,offsetpop=NULL) 
 \method{print}{monthglm}(x, ...)
 }
 \arguments{
@@ -19,10 +19,6 @@ monthglm(formula,data,family=gaussian(),refmonth=1,
     \code{\link{family}} for details of family functions.).}
   \item{refmonth}{reference month, must be between 1 and 12 (default=1
     for January).}
-  \item{month}{name of the numeric integer representing month
-    (default=\sQuote{month}).}
-  \item{year}{name of the 4 digit number representing year
-    (default=\sQuote{year}.)}
   \item{offsetmonth}{include an offset to account for the uneven number
     of days in the month (TRUE/FALSE). Should be used for monthly counts
     (with \code{family=poisson()}).}

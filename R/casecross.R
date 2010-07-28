@@ -74,7 +74,9 @@ casecross<-function(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,usef
   maxwindows<-max(cases$windownum)
   rowstorep<-NA
   casenum<-NA
-  for (k in 1:maxwindows){
+  # Fix for missing windows (thanks to Yuming)
+  windowrange<-as.numeric(levels(as.factor(windownum)))
+  for (k in windowrange){
     small=min(cases$time[cases$windownum==k])
     large=max(cases$time[cases$windownum==k])
     these<-rep(small:large,large-small+1)
