@@ -20,6 +20,6 @@
 }
 \examples{
 data(AFL)
-barplot(AFL$players,names.arg=month.abb)
+barplot(AFL$players, names.arg=month.abb)
 }
 \keyword{datasets}

@@ -5,8 +5,8 @@
 %%\alias{plot.nsCosinor}
 \title{Non-stationary cosinor}
 \description{Decompose a time series using a non-stationary cosinor for the seasonal pattern.}
-\usage{nscosinor(data,response,cycles,niters=1000,burnin=500,tau,inits,lambda=1/12,
-div=50,monthly=TRUE)
+\usage{nscosinor(data, response, cycles, niters=1000, burnin=500, tau, inits,
+                 lambda=1/12, div=50, monthly=TRUE, alpha=0.05)
 
 %%\method{print}{nsCosinor}(x, ...)
 %%\method{summary}{nsCosinor}(x, ...)
@@ -20,10 +20,11 @@ div=50,monthly=TRUE)
   \item{burnin}{number of MCMC samples discarded as a burn-in (default=500).}
   \item{tau}{vector of smoothing parameters, tau[1] for trend, tau[2] for 1st seasonal parameter, tau[3] for 2nd seasonal parameter, etc. Larger values of tau allow more change between observations and hence a
 greater potential flexibility in the trend and season.}
-  \item{inits}{vector of initial values for the MCMC chain. Initial values should be given for each seasonal cycle.}
+  \item{inits}{vector of initial value(s) for the MCMC chain(s) for \code{std.season}. Initial values should be given for each seasonal cycle.}
   \item{lambda}{distance between observations (lambda=1/12 for monthly data, default).}
   \item{div}{divisor at which MCMC sample progress is reported (default=50).}
   \item{monthly}{TRUE for monthly data.}
+  \item{alpha}{Statistical significance level used by the confidence intervals.}
   \item{\dots}{further arguments passed to or from other methods.}
 }
 \details{This model is designed to decompose an equally spaced time series into a trend, season(s) and noise. 
@@ -56,7 +57,7 @@ Returns an object of class \dQuote{nsCosinor} with the following parts:
 \item{fitted}{fitted values, based on trend + season(s).} 
 \item{residuals}{residuals based on mean trend and season(s).}
 \item{n}{the length of the series.}
-\item{chains}{MCMC chains (of class \code{\link{mcmc}}) of variance estimates: standard error for overall noise (std.error), phase, amplitude, standard error for season(s) (std.season).}
+\item{chains}{MCMC chains (of class \code{\link{mcmc}}) of variance estimates: standard error for overall noise (std.error), standard error for season(s) (std.season), phase(s) and amplitude(s)}
 \item{cycles}{vector of cycles in units of time.}
 }
 \references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.
@@ -66,17 +67,14 @@ Barnett, A.G., Dobson, A.J. (2004) Estimating trends and seasonality in coronary
 \seealso{\code{plot.nsCosinor}, \code{summary.nsCosinor}}
 \examples{
 data(CVD)
-# adjust the number of CVD deaths to account for 
-# the unequal number of deaths in the months
-CVD$adj<-CVD$cvd*((365.25/12)/CVD$ndaysmonth)
 # model to fit an annual pattern to the monthly cardiovascular disease data
-f<-c(12)
-inits<-c(1)
-tau<-c(130,10)
-\dontrun{res12<-nscosinor(data=CVD,response=adj,cycles=f,niters=5000,
-burnin=1000,tau=tau,inits=inits)
+f = c(12)
+inits = c(1)
+tau = c(130,10)
+\dontrun{res12 = nscosinor(data=CVD, response=adj, cycles=f, niters=5000,
+         burnin=1000, tau=tau, inits=inits)
 summary(res12)
 plot(res12)
 plot(res12$chains$amp)}
-\dontshow{res12<-nscosinor(data=CVD,response=adj,cycles=f,niters=50,burnin=10,tau=tau,inits=inits)}
+\dontshow{res12 = nscosinor(data=CVD, response=adj, cycles=f, niters=50, burnin=10, tau=tau, inits=inits)}
 }

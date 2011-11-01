@@ -3,10 +3,10 @@
 \alias{print.monthglm}
 \title{Fit a GLM with month}
 \description{Fit a generalized linear model with a categorical
-  independent variable of month.}
+  variable of month.}
 \usage{
-monthglm(formula,data,family=gaussian(),refmonth=1,
-         offsetmonth=FALSE,offsetpop=NULL) 
+monthglm(formula, data, family=gaussian(), refmonth=1,
+         monthvar='month',offsetmonth=FALSE, offsetpop=NULL) 
 \method{print}{monthglm}(x, ...)
 }
 \arguments{
@@ -19,6 +19,9 @@ monthglm(formula,data,family=gaussian(),refmonth=1,
     \code{\link{family}} for details of family functions.).}
   \item{refmonth}{reference month, must be between 1 and 12 (default=1
     for January).}
+  \item{monthvar}{name of the month variable which is either
+    an interger (1 to 12) or a character or factor (`Jan' to
+    `Dec' or `January' to `December') (default='month').}
   \item{offsetmonth}{include an offset to account for the uneven number
     of days in the month (TRUE/FALSE). Should be used for monthly counts
     (with \code{family=poisson()}).}
@@ -28,7 +31,7 @@ monthglm(formula,data,family=gaussian(),refmonth=1,
   \item{x}{Object of class \code{monthglm}}
   \item{\dots}{further arguments passed to or from other methods.}
 }
-\details{Month is fitted as an independent variable as part of a
+\details{Month is fitted as a categorical variable as part of a
   generalized linear model. Other independent variables can be added to
   the right-hand side of \code{formula}.
   
@@ -49,7 +52,7 @@ monthglm(formula,data,family=gaussian(),refmonth=1,
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 data(CVD)
-mmodel<-monthglm(formula=cvd~1,data=CVD,family=poisson(),
-offsetpop=pop/100000,offsetmonth=TRUE)
+mmodel = monthglm(formula=cvd~1 ,data=CVD, family=poisson(),
+                  offsetpop=pop/100000, offsetmonth=TRUE)
 summary(mmodel)
 }

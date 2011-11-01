@@ -2,8 +2,8 @@
 \alias{cosinor}
 \title{Cosinor regression model for detecting seasonality}
 \description{Fits a cosinor model as part of a generalized linear model.}
-\usage{cosinor(formula,date,data,family=gaussian(),alpha=0.05,cycles=1,
-rescheck=FALSE,type='daily',offsetmonth=FALSE,offsetpop=NULL,text=TRUE)}  %% plot=FALSE,
+\usage{cosinor(formula, date, data, family=gaussian() ,alpha=0.05, cycles=1,
+               rescheck=FALSE, type='daily', offsetmonth=FALSE, offsetpop=NULL, text=TRUE)}
 \arguments{
   \item{formula}{regression formula.}
   \item{date}{a date variable if type=\dQuote{daily}, or an integer
@@ -11,7 +11,7 @@ rescheck=FALSE,type='daily',offsetmonth=FALSE,offsetpop=NULL,text=TRUE)}  %% plo
     \item{data}{data set as a data frame.}
   \item{family}{a description of the error distribution and link
     function to be used in the model. Available link functions:
-    identity, log, logit, cloglog.}
+    identity, log, logit, cloglog. Note, it must have the parentheses.}
   \item{alpha}{significance level, set to 0.05 (default).}
   \item{cycles}{number of seasonal cycles per year.}
   \item{rescheck}{plot the residual checks (TRUE/FALSE), see
@@ -43,6 +43,7 @@ Returns an object of class \dQuote{Cosinor} with the following parts:
   \item{glm}{an object of class \code{glm} (see \code{\link{glm}}).}
   \item{fitted}{fitted values for intercept and cosinor only (ignoring
     other independent variables).}
+  \item{fitted.plus}{standard fitted values, including all other independent variables.}
   \item{residuals}{residuals.}
   \item{date}{date variable (in Date format when type=\sQuote{daily}).}
 }
@@ -54,13 +55,13 @@ Returns an object of class \dQuote{Cosinor} with the following parts:
 ## cardiovascular disease data (offset based on number of days in... 
 ## ...the month scaled to an average month length)
 data(CVD)
-res<-cosinor(cvd~1,date=month,data=CVD,type='monthly',
-family=poisson(),offsetmonth=TRUE)
+res = cosinor(cvd~1, date=month, data=CVD, type='monthly',
+              family=poisson(), offsetmonth=TRUE)
 summary(res)
 # stillbirth data
 data(stillbirth)
-res<-cosinor(stillborn~1,date=dob,data=stillbirth,
-             family=binomial(link='cloglog'))
+res = cosinor(stillborn~1, date=dob, data=stillbirth,
+              family=binomial(link='cloglog'))
 summary(res)
 plot(res)
 }

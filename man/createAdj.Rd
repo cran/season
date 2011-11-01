@@ -4,7 +4,7 @@
 \description{Creates an adjacency matrix in a form suitable for using in
   \code{BRugs} or WinBUGS.
 }
-\usage{createAdj(matrix,filename='Adj.txt',suffix=NULL)} 
+\usage{createAdj(matrix, filename='Adj.txt', suffix=NULL)} 
 \arguments{
   \item{matrix}{square matrix with 1's for neighbours and NA's for
     non-neighbours.}
@@ -32,7 +32,7 @@
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 # Nearest neighbour matrix for 5 time points
-x <- c(NA,1,NA,NA,NA)
-(V <- toeplitz(x))
+x = c(NA,1,NA,NA,NA)
+(V = toeplitz(x))
 createAdj(V)
 }

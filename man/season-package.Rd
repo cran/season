@@ -2,7 +2,7 @@
 \alias{season-package}
 \alias{season}
 \docType{package}
-\title{ Tools for uncovering and estimating seasonal patterns.
+\title{Tools for uncovering and estimating seasonal patterns.
 }
 \description{
   The package contains graphical methods for displaying seasonal data
@@ -30,8 +30,8 @@ time).
   \tabular{ll}{
     Package: \tab season\cr
     Type: \tab Package\cr
-    Version: \tab 0.2-4\cr
-    Date: \tab 2010-03-03\cr
+    Version: \tab 0.2-6\cr
+    Date: \tab 2011-10-23\cr
     License: \tab GPL (>= 3)\cr
   }
 }

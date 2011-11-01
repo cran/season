@@ -34,7 +34,7 @@
 \references{Samet JM, Dominici F, Zeger SL, Schwartz J, Dockery DW (2000). \emph{The National Morbidity, Mortality, and Air Pollution Study, Part I: Methods and Methodologic Issues}. Research Report 94, Health Effects Institute, Cambridge MA.}
 \examples{
 data(CVDdaily)
-plot(CVDdaily$date,CVDdaily$cvd,type='p',xlab='Date',ylab=
-'Number of CVD deaths')
+plot(CVDdaily$date, CVDdaily$cvd, type='p', xlab='Date',
+     ylab='Number of CVD deaths')
 }
 \keyword{datasets}

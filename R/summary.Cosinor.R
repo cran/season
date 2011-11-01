@@ -1,7 +1,7 @@
 # summary.Cosinor.R
-# Oct 2009
+# Oct 2011
 
-summary.Cosinor<-function(object, ...){
+summary.Cosinor<-function(object, digits=2, ...){
 ## Checks
   if (class(object)!="Cosinor"){stop("Object must be of class 'Cosinor'")} 
  cnames<-row.names(object$glm$coefficients)
@@ -10,8 +10,8 @@ summary.Cosinor<-function(object, ...){
 # amplitude and phase
  amp<-sqrt((object$glm$coefficients[cindex,1]^2)+(object$glm$coefficients[sindex,1]^2))
  addition<-''
- link<-object$glm$link
- if (is.null(object$glm$link)){link<-' '}
+ link<-object$glm$family$link
+ if (is.null(object$glm$family$link)){link<-' '}
  if (link=='logit'){
    p1<-exp(object$glm$coefficients[1,1])/(1+exp(object$glm$coefficients[1,1])) # back-transform amp
    p2<-exp(object$glm$coefficients[1,1]+amp)/(1+exp(object$glm$coefficients[1,1]+amp)) # back-transform amp
@@ -48,6 +48,8 @@ summary.Cosinor<-function(object, ...){
  ret$lphase=lphase
  ret$significant=significant
  ret$alpha=object$call$alpha
+ ret$digits=digits
+ ret$text=object$call$text # display phase as text (TRUE/FALSE)
  class(ret) <- "summary.Cosinor"
  ret # uses print.summary.Cosinor
 }

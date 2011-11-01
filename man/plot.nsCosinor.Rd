@@ -4,7 +4,7 @@
 \title{Plot the results of a Non-stationary cosinor}
 \description{Plots the residuals, trend and season(s) from a \code{nsCosinor} object produced by \code{nscosinor}.}
 \usage{
-\method{plot}{nsCosinor}(x,...)
+\method{plot}{nsCosinor}(x, ...)
 }
 \arguments{
   \item{x}{a \code{nsCosinor} object produced by \code{nscosinor}.}

@@ -2,7 +2,7 @@
 # convert fraction of the year into a date (day and month)
 # month on a scale of [1,13)
 # type =  monthly/daily
-# April 2009
+# Oct 2011
 
 invyrfraction<-function(frac,type='daily',text=TRUE){
   n<-length(frac)
@@ -24,7 +24,7 @@ invyrfraction<-function(frac,type='daily',text=TRUE){
   }
   if (type=='monthly'){
      month<-(frac*12)+1;
-     if (text==TRUE){daym<-paste('Month =',month)}
+     if (text==TRUE){daym<-paste('Month =',round(month,1))}
      if (text==FALSE){daym<-month}
   }
   return(daym)

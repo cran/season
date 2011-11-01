@@ -1,11 +1,11 @@
 \name{casecross}
 \alias{casecross}
 \title{Case--crossover analysis to control for seasonality}
-\description{Fits a time-stratified case--crossover to time series data.}
-\usage{casecross(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,
-usefinalwindow=FALSE,matchconf='',confrange=0,stratamonth=FALSE)}
+\description{Fits a time-stratified case--crossover to regularly spaced time series data. The function is not suitable for irregularly spaced individual data. The function only uses a time-stratified design, and other designs such as the symmetric bi-directional design, are not available.}
+\usage{casecross(formula, data, exclusion=2, stratalength=28, matchdow=FALSE,
+                 usefinalwindow=FALSE, matchconf='', confrange=0, stratamonth=FALSE)}
 \arguments{
-  \item{formula}{formula. The dependent variable is assumed to be an integer count (e.g., daily number of deaths).}
+  \item{formula}{formula. The dependent variable should be an integer count (e.g., daily number of deaths).}
   \item{data}{data set as a data frame.}
   \item{exclusion}{exclusion period (in days) around cases, set to 2 (default). Must be positive and smaller than \code{stratalength}.}
   \item{stratalength}{length of stratum in days, set to 28 (default).}
@@ -39,8 +39,9 @@ usefinalwindow=FALSE,matchconf='',confrange=0,stratamonth=FALSE)}
 \value{
   \item{call}{the original call to the casecross function.} 
   \item{c.model}{conditional logistic regression model of class \code{coxph}.}
-  \item{ncases}{number of case days with at least one control day.}
-  \item{ncontrols}{average number of control days per case day.}
+  \item{ncases}{total number of cases.}
+  \item{ncasedays}{number of case days with at least one control day.}
+  \item{ncontroldayss}{average number of control days per case day.}
 }
 \references{Janes, H., Sheppard, L., Lumley, T. (2005) Case-crossover analyses of air pollution exposure data:
   Referent selection strategies and their implications for bias. \emph{Epidemiology} 16(6), 717--726.
@@ -52,13 +53,13 @@ usefinalwindow=FALSE,matchconf='',confrange=0,stratamonth=FALSE)}
 # cardiovascular disease data
 data(CVDdaily)
 # Effect of ozone on CVD death
-model1<-casecross(cvd~o3mean+tmpd+Mon+Tue+Wed+Thu+Fri+Sat,data=CVDdaily)
+model1 = casecross(cvd ~ o3mean+tmpd+Mon+Tue+Wed+Thu+Fri+Sat, data=CVDdaily)
 summary(model1)
 # match on day of the week
-model2<-casecross(cvd~o3mean+tmpd,matchdow=TRUE,data=CVDdaily)
+model2 = casecross(cvd ~ o3mean+tmpd,matchdow=TRUE, data=CVDdaily)
 summary(model2)
 # match on temperature to within a degree
-model3<-casecross(cvd~o3mean+Mon+Tue+Wed+Thu+Fri+Sat,data=CVDdaily,
-matchconf='tmpd',confrange=1)
+model3 = casecross(cvd ~ o3mean+Mon+Tue+Wed+Thu+Fri+Sat, data=CVDdaily,
+                   matchconf='tmpd', confrange=1)
 summary(model3)
 }

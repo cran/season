@@ -3,7 +3,7 @@
 \title{Plot results by month}
 \description{Plots results by month.}
 \usage{
-plotMonth(data,resp,panels=12,\dots)
+plotMonth(data, resp, panels=12, \dots)
 }
 \arguments{
   \item{data}{a data frame.}
@@ -16,5 +16,5 @@ plotMonth(data,resp,panels=12,\dots)
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 data(CVD)
-plotMonth(data=CVD,resp=cvd,panels=12)
+plotMonth(data=CVD, resp=cvd, panels=12)
 }

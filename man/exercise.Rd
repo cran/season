@@ -23,6 +23,6 @@
 \references{Eakin E, et al (2009) Telephone counselling for physical activity and diet in type 2 diabetes and hypertension, \emph{Am J of Prev Med}, vol 36, pages 142--9}
 \examples{
 data(exercise)
-boxplot(exercise$walking~exercise$month)
+boxplot(exercise$walking ~ exercise$month)
 }
 \keyword{datasets}

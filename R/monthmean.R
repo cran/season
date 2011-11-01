@@ -5,6 +5,7 @@
 
 monthmean<-function(data,resp,pop=NULL,adjmonth=FALSE){
   attach(data,warn.conflicts=FALSE)
+  on.exit(detach(data))
 # checks
   if (is.null(data)==TRUE){stop("must have an input data set (data)")}
   if (is.null(resp)==TRUE){stop("must have an input variable (resp)")}
@@ -21,7 +22,6 @@ monthmean<-function(data,resp,pop=NULL,adjmonth=FALSE){
      if (adjmonth!=FALSE) mean[i]<-mean(resp[data$month==i]*(adjf/days$ndaysmonth[i])/adjp)
      else mean[i]<-mean(resp[data$month==i]/adjp) # no monthly adjustment
   }
-  detach(data)
 # return
   toret<-list()
   toret$mean<-as.vector(mean)

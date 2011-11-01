@@ -4,13 +4,14 @@
 \title{Summary for a cosinor}
 \description{The default print method for a \code{Cosinor} object produced by \code{cosinor}.}
 \usage{
-\method{summary}{Cosinor}(object, ...)
+\method{summary}{Cosinor}(object, digits=2, ...)
 \method{print}{summary.Cosinor}(x, ...)
 }
 \arguments{
   \item{object}{a \code{Cosinor} object produced by \code{cosinor}.}
   \item{x}{a \code{summary.Cosinor} object produced by
     \code{summary.Cosinor}.}
+  \item{digits}{minimal number of significant digits, see \code{print.default}}
   \item{\dots}{further arguments passed to or from other methods.}
 }
 \value{

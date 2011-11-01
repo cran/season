@@ -2,7 +2,7 @@
 ##** Seasonal decomposition macro **
 ##**********************************
 ##** Adrian Barnett               **
-##** April 2008                   **
+##** April 2008, updated Oct 2011 **
 ##**********************************
 ### Inputs
 ## data = data
@@ -23,7 +23,7 @@
 ## assumes year and month exist in data; assumes no missing data
 `nscosinor` <-
   function(data,response,cycles,niters=1000,burnin=500,tau,inits,
-           lambda=1/12,div=50,monthly=TRUE){
+           lambda=1/12,div=50,monthly=TRUE,alpha=0.05){
     attach(data, warn.conflicts = FALSE)
     names<-names(data)
     yearyes<-sum(names=='year')
@@ -76,18 +76,17 @@
     oseason<-as.data.frame(matrix(0,n,3))
     names(trend)<-c('mean','lower','upper')
     names(oseason)<-c('mean','lower','upper')
-    allseasons<-matrix(data=NA,ncol=niters-burnin+1,nrow=n)
+    allseasons<-matrix(data=NA,ncol=niters-burnin,nrow=n)
     snums<-((1:k)*2)+1
     for (i in 1:n){ 
-      for (j in burnin:niters){ 
-        allseasons[i,j-burnin+1]<-sum(alphachain[snums,i,j])
+      for (j in (burnin+1):niters){ 
+        allseasons[i,j-burnin]<-sum(alphachain[snums,i,j])
       }
     }
-    alpha=0.05;
     lprob=alpha/2;
     uprob=1-(alpha/2);
-    lnum<-round((niters-burnin+1)*lprob);
-    unum<-round((niters-burnin+1)*uprob);
+    lnum<-round((niters-burnin)*lprob);
+    unum<-round((niters-burnin)*uprob);
     for (i in 1:n){ 
       trend$mean[i]<-mean(alphachain[1,i,burnin:niters])
       trend$lower[i]<-sum(as.numeric(rank(alphachain[1,i,burnin:niters])==lnum)*alphachain[1,i,burnin:niters])
@@ -125,20 +124,25 @@
     toret$fitted.values<-fitted
     toret$residuals<-res
     toret$n<-n
+    toret$chains$std.error<-varthetachain
     toret$chains$std.season<-matrix(data=NA,nrow=niters+1,ncol=k)
-    toret$chains$std.error<-coda::mcmc(data=varthetachain[burnin:(niters+1)],start=burnin)
     toret$chains$phase<-matrix(data=NA,nrow=niters+1,ncol=k)
     toret$chains$amplitude<-matrix(data=NA,nrow=niters+1,ncol=k)
-    for (i in 1:k){
+    for (i in 1:k){ # for multiple cycles
       toret$chains$std.season[,i]<-lchain[,i]
       toret$chains$phase[,i]<-phasechain[,i]
       toret$chains$amplitude[,i]<-ampchain[,i]
     }
-    toret$chains$std.season<-coda::mcmc(data=toret$chains$std.season[burnin:(niters+1),],start=burnin)
-    toret$chains$phase<-coda::mcmc(data=toret$chains$phase[burnin:(niters+1),],start=burnin)
-    toret$chains$amplitude<-coda::mcmc(data=toret$chains$amplitude[burnin:(niters+1),],start=burnin)
+    toret$chains <- coda::mcmc(cbind(
+      toret$chains$std.error[(burnin+2):(niters + 1)], 
+      toret$chains$std.season[(burnin+2):(niters +1), ],
+      toret$chains$phase[(burnin+2):(niters + 1), ],
+      toret$chains$amplitude[(burnin+2):(niters + 1), ]), start = burnin+1)
+    # Add the names
+    colnames(toret$chains)=c('std.error',paste('std.season',1:k,sep=''),paste('phase',1:k,sep=''),paste('amplitude',1:k,sep=''))
     toret$cycles<-cycles
     class(toret)<-'nsCosinor'
     return(toret)
     detach(data)
-  }
+  } # end of function
+

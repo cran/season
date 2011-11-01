@@ -21,8 +21,8 @@
 }
 \examples{
 data(schz)
-plot(schz$yrmon,schz$SczBroad,type='o',xlab='Date',ylab=
-'Number of schizophrenia births')
+plot(schz$yrmon, schz$SczBroad, type='o', xlab='Date',
+     ylab='Number of schizophrenia births')
 }
 \keyword{datasets}
 

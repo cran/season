@@ -2,7 +2,7 @@
 \alias{monthmean}
 \title{Monthly means}
 \description{Calculate the monthly mean or adjusted monthly mean for count data.}
-\usage{monthmean(data,resp,pop=NULL,adjmonth=FALSE)} 
+\usage{monthmean(data, resp, pop=NULL, adjmonth=FALSE)} 
 \arguments{
   \item{data}{data set as a data frame.}
   \item{resp}{response variable in the data set for which the means will be calculated.}
@@ -23,7 +23,7 @@ Returns an object of class \dQuote{Monthmean} with the following parts:
 \examples{
 # cardiovascular disease data
 data(CVD)
-mmean<-monthmean(data=CVD,resp=cvd,adjmonth='average')
+mmean = monthmean(data=CVD, resp=cvd, adjmonth='average')
 mmean
 plot(mmean)
 }

@@ -23,5 +23,5 @@
 }
 \examples{
 data(stillbirth)
-table(stillbirth$month,stillbirth$stillborn)
+table(stillbirth$month, stillbirth$stillborn)
 }

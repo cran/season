@@ -1,5 +1,6 @@
 # Calculates the periodogram
 'peri'<-function(data,adjmean=TRUE,plot=TRUE){
+  op <- par(no.readonly = TRUE) # the whole list of settable par's.
   if(adjmean==TRUE) adjust<-mean(data) else adjust<-0
   n<-length(data)
   nfft<-(n/2)+1
@@ -30,4 +31,5 @@
     plot(c[3:nfft],peri[3:nfft],ylab='Periodogram',xlab='Cycles',type='h')
   }
   return(list(peri=peri,f=f,c=c,amp=amp,phase=phase))
+  par(op) # restore graphic settings
 }

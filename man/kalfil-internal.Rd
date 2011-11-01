@@ -2,7 +2,7 @@
 \alias{kalfil}
 \title{Forward and backward sweep of the Kalman filter}
 \description{Internal function to do a forward and backward sweep of the Kalman filter, used by \code{nscosinor}. For internal use only.}
-\usage{kalfil(data,f,vartheta,w,tau,lambda,cmean)}
+\usage{kalfil(data, f, vartheta, w, tau, lambda, cmean)}
 \arguments{
   \item{data}{a data frame.}
   \item{f}{vector of cycles in units of time.}

@@ -2,7 +2,7 @@
 \alias{sinusoid}
 \title{Plot a sinusoid}
 \description{Plots a sinusoid over 0 to 2\eqn{\pi}.}
-\usage{sinusoid(amplitude,frequency,phase,...)}
+\usage{sinusoid(amplitude, frequency, phase, ...)}
 \arguments{
   \item{amplitude}{the amplitude of the sinsuoid (its maximum value).}
   \item{frequency}{the frequency of the sinusoid in 0 to 2\eqn{\pi} (number of cycles).}
@@ -13,5 +13,5 @@
 \references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
-sinusoid(amplitude=1,frequency=1,phase=1)
+sinusoid(amplitude=1, frequency=1, phase=1)
 }

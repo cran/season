@@ -4,6 +4,7 @@
 
 flagleap<-function(data,report=TRUE,matchin=FALSE){
   attach(data,warn.conflicts=FALSE)
+  on.exit(detach(data))
   n<-nrow(data)
   yrmon<-year+((month-1)/12); # used later
   startyr<-min(data$year)
@@ -33,7 +34,6 @@ flagleap<-function(data,report=TRUE,matchin=FALSE){
      days<-days[index,]
   }
 # Finish
-  detach(data)
   return(days)
 }
 

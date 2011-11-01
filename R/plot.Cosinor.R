@@ -17,11 +17,11 @@ plot.Cosinor<-function(x,...){
   o<-order(x$date)
   par(mai=c(0.8,0.8,0.1,0.1)) # c(bottom, left, top, right)
   if (x$call$link!='logit'&x$call$link!='cloglog'){
-     plot(x$date[o],x$fitted[o],type='l',xaxt='n',xlab='Time',ylab=ylab,...)
+     plot(x$date[o],x$fitted.values[o],type='l',xaxt='n',xlab='Time',ylab=ylab,...)
      if (x$call$type=='monthly'){
         m.abb=substr(month.abb,1,1)
         axis(side=1,at=1:12,labels=m.abb)
-        points(x$date[o],x$fitted[o],pch=19)
+        points(x$date[o],x$fitted.values[o],pch=19)
      }
      if (x$call$type=='daily'){
         years<-as.numeric(names(table(format(x$date,'%Y'))))
@@ -32,11 +32,11 @@ plot.Cosinor<-function(x,...){
   }
   if (x$call$link=='logit'|x$call$link=='cloglog'){
      ylab<-paste('Probability(',ylab,')',sep='')
-     plot(x$date[o],x$fitted[o],type='l',xaxt='n',col='black',xlab='Time',ylab=ylab,...)
+     plot(x$date[o],x$fitted.values[o],type='l',xaxt='n',col='black',xlab='Time',ylab=ylab,...)
      if (x$call$type=='monthly'){
         m.abb=substr(month.abb,1,1)
         axis(side=1,at=1:12,labels=m.abb)
-        points(x$date[o],x$fitted[o],pch=19)
+        points(x$date[o],x$fitted.values[o],pch=19)
      }
      if (x$call$type=='daily'){
         years<-as.numeric(names(table(format(x$date,'%Y'))))

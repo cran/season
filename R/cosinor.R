@@ -4,7 +4,7 @@
 # date = date for daily data, month for monthly data
 # type =  monthly/daily
 # phase results based on 1 cycle per year
-# April 2009
+# Oct 2011
 
 cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
                   cycles=1, rescheck=FALSE, type='daily', offsetmonth=FALSE,
@@ -15,6 +15,7 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
     stop("Error: 'offsetmonth' must be of type logical")}
   if (type!='daily'&type!='monthly'){stop("type must be daily or monthly")}
   attach(data,warn.conflicts=FALSE)
+  on.exit(detach(data))
   if (type=='daily'&class(date)!='Date'){
     stop("date variable must be of class Date when type='daily'")}
   if (alpha<=0|alpha>=1){stop("alpha must be between 0 and 1")}
@@ -48,7 +49,6 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
   offset<-log(poff*moff)
                                         # generalized linear model
   model<-glm(f,data=data,family=family,offset=offset)
-  detach(data)
   s<-summary(model)
   res<-residuals(model)
 
@@ -56,6 +56,7 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
   cnames<-row.names(s$coefficients)
   cindex<-sum(as.numeric(cnames=='cosw')*(1:length(cnames)))
   sindex<-sum(as.numeric(cnames=='sinw')*(1:length(cnames)))
+  fitted=fitted(model) # standard fitted values
   pred<-s$coefficients[1,1]+(s$coefficients[cindex,1]*newdata$cosw)+
     (s$coefficients[sindex,1]*newdata$sinw)
                                         # back-transform
@@ -66,6 +67,7 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
   toret<-list()
   toret$call<-call
   toret$glm<-s
+  toret$fitted.plus<-fitted
   toret$fitted.values<-pred
   toret$residuals<-res
   toret$date<-date

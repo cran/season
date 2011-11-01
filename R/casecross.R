@@ -1,15 +1,18 @@
 ## casecross.R
 ## time-stratified case-crossover
-## Oct 2009
+## Oct 2011
 ## assumes date variable is called 'date'
 ## quicker version
 
-casecross<-function(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,usefinalwindow=FALSE,matchconf='',confrange=0,stratamonth=FALSE){
+casecross<-function(formula, data, exclusion=2, stratalength=28,
+                    matchdow=FALSE, usefinalwindow=FALSE, matchconf='',
+                    confrange=0,stratamonth=FALSE){
   attach(data, warn.conflicts = FALSE)
   thisdata<-data
   detach(data)
   ## Checks
-  if (class(thisdata$date)!="Date"){stop("date variable must be in date format, see ?Dates")} 
+  if (class(thisdata$date)!="Date"){
+    stop("date variable must be in date format, see ?Dates")} 
   if (exclusion<0){stop("Minimum value for exclusion is zero")} 
   parts<-paste(formula)
   dep<-parts[2] # dependent variable
@@ -27,8 +30,14 @@ casecross<-function(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,usef
     f<-as.formula(paste(dep,"~",indep,'+date+dow+',matchconf))
   }
   datatouse<-model.frame(f,data=thisdata,na.action=na.omit) # remove cases with missing covariates
+  ## Check for irregularly spaced data
+  if(any(diff(datatouse$date)>1)){
+     cat('Note, irregularly spaced data...\n')
+     cat('...check your data for missing days\n')
+  }
   datediff<-as.numeric(datatouse$date)-min(as.numeric(thisdata$date)) # use minimum data in entire sample
   time<-as.numeric(datediff)+1 # used as strata number
+
   ## Create strata
   if (stratamonth==TRUE){
     month<-as.numeric(format(datatouse$date,'%m'));
@@ -46,8 +55,10 @@ casecross<-function(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,usef
     ## Exclude the last window if it is less than 'stratalength'
     lastwindow<-datatouse[datatouse$windownum==nwindows,]
     if (nrow(lastwindow)>0){ # only apply to data sets with some data in the final window
-      lastlength<-max(time[windownum==nwindows])-min(time[windownum==nwindows])+1
-      if (lastlength<stratalength&usefinalwindow==FALSE) datatouse<-datatouse[windownum<nwindows,]
+      lastlength<-max(time[windownum==nwindows])-
+        min(time[windownum==nwindows])+1
+      if (lastlength<stratalength&usefinalwindow==FALSE) datatouse <-
+        datatouse[windownum<nwindows,]
     }
   }
   ## Create the case data
@@ -59,16 +70,19 @@ casecross<-function(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,usef
   cases$time<-time
   cases$diffdays<-NA
   cases$matchday<-matchday
-  posout<-sum(as.numeric(names(datatouse)==as.character(f[2]))*(1:ncol(datatouse))) # get the position of the dependent variable
+  posout<-sum(as.numeric(names(datatouse)==as.character(f[2]))*
+              (1:ncol(datatouse))) # get the position of the dependent variable
   cases$outcome<-datatouse[,c(posout)]
-  nonzerocases<-cases[cases$outcome>0,] # days with one or more cases
+  # October 2011, removed nonzerocases
   # Create a case number for matching
-  if (substr(matchconf,1,1)==""){cases.tomerge<-subset(nonzerocases,select=c(matchday,time,outcome,windownum,dow))}
+  if (substr(matchconf,1,1)==""){
+    cases.tomerge<-subset(cases,select=c(matchday,time,outcome,windownum,dow))}
   if (substr(matchconf,1,1)!=""){
-     also<-sum(as.numeric(names(nonzerocases)==matchconf)*(1:length(names(nonzerocases))))
-     cases.tomerge<-subset(nonzerocases,select=c(matchday,time,outcome,windownum,dow,also))
+     also<-sum(as.numeric(names(cases)==matchconf)*(1:length(names(cases))))
+     cases.tomerge<-subset(cases,
+                           select=c(matchday,time,outcome,windownum,dow,also))
   }
-  ncases<-nrow(nonzerocases)
+  ncases<-nrow(cases)
   cases.tomerge$casenum<-1:ncases
   # Duplicate case series to make controls
   maxwindows<-max(cases$windownum)
@@ -105,19 +119,21 @@ casecross<-function(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,usef
      matchdiff<-abs(controls[,find1]-controls[,find2])
      controls<-controls[matchdiff<=confrange,] 
      controls<-subset(controls,select=c(-casenum,-dow.x,-dow.y,-matchday.x,-matchday.y,-windownum.x,-windownum.y,-find1,-find2))
-     findc<-sum(as.numeric(names(nonzerocases)==matchconf)*(1:length(names(nonzerocases))))
-     final.cases<-subset(nonzerocases,select=c(-dow,-matchday,-windownum,-findc))
+     findc<-sum(as.numeric(names(cases)==matchconf)*(1:length(names(cases))))
+     final.cases<-subset(cases,select=c(-dow,-matchday,-windownum,-findc))
   }
   if (substr(matchconf,1,1)==""){
     controls<-subset(controls,select=c(-casenum,-dow.x,-dow.y,-matchday.x,-matchday.y,-windownum.x,-windownum.y))
-    final.cases<-subset(nonzerocases,select=c(-dow,-matchday,-windownum))
+    final.cases<-subset(cases,select=c(-dow,-matchday,-windownum))
   }
   finished<-rbind(final.cases,controls)
   ## Remove empty controls
   finished<-finished[finished$outcome>0,]
-  ## Count the number of controls without a case
+  ## Count the number of control days without a case day, and the total number of cases
   onlycntl<-finished[finished$case==0,]
   ncases<-nrow(table(onlycntl$time))
+  which.times=unique(onlycntl$time)
+  extra.only=final.cases[final.cases$time%in%which.times,]
   ncontrols<-round(mean(as.numeric(table(onlycntl$time))),1)
   ## Run the conditional logistic regression
   finalformula<-as.formula(paste('Surv(timex,case)~',indep,'+strata(time)'))
@@ -128,8 +144,9 @@ casecross<-function(formula,data,exclusion=2,stratalength=28,matchdow=FALSE,usef
   toret$call<-call
   toret$c.model<-c.model
   class(toret$c.model)<-"coxph"
-  toret$ncases<-ncases
-  toret$ncontrols<-ncontrols
+  toret$ncases<-sum(extra.only$outcome)
+  toret$ncasedays<-ncases
+  toret$ncontroldays<-ncontrols
   class(toret)<-'casecross'
   return(toret)
 }

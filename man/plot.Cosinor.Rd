@@ -4,7 +4,7 @@
 \title{Plot the results of a cosinor}
 \description{Plots the residuals and fitted sinusoid from a \code{Cosinor} object produced by \code{cosinor}.}
 \usage{
-\method{plot}{Cosinor}(x,...)
+\method{plot}{Cosinor}(x, ...)
 }
 \arguments{
   \item{x}{a \code{Cosinor} object produced by \code{cosinor}.}

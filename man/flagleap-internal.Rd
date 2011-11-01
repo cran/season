@@ -2,7 +2,7 @@
 \alias{flagleap}
 \title{Count the number of days in the month}
 \description{Counts the number of days per month given a range of dates. Used to adjust monthly count data for the at-risk time period. For internal use only.}
-\usage{flagleap(data,report=TRUE,matchin=FALSE)}
+\usage{flagleap(data, report=TRUE, matchin=FALSE)}
 \arguments{
   \item{data}{data.}
   \item{report}{produce a brief report on the range of time used (default=TRUE).}
@@ -18,5 +18,5 @@
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
 data(CVD)
-days<-flagleap(data=CVD)
+days = flagleap(data=CVD)
 }
