@@ -2,7 +2,7 @@
 ##** Seasonal decomposition macro **
 ##**********************************
 ##** Adrian Barnett               **
-##** April 2008, updated Oct 2011 **
+##** April 2008, updated Dec 2011 **
 ##**********************************
 ### Inputs
 ## data = data
@@ -22,7 +22,7 @@
 ##
 ## assumes year and month exist in data; assumes no missing data
 `nscosinor` <-
-  function(data,response,cycles,niters=1000,burnin=500,tau,inits,
+  function(data,response,cycles,niters=1000,burnin=500,tau,
            lambda=1/12,div=50,monthly=TRUE,alpha=0.05){
     attach(data, warn.conflicts = FALSE)
     names<-names(data)
@@ -32,8 +32,6 @@
       stop("Data needs to contain numeric year and month variables")}
     if (length(tau)!=length(cycles)+1) {
       stop("Need to give a smoothing parameter (tau) for each cycle, plus one for the trend")}
-    if (length(inits)!=length(cycles)) {
-      stop("Need to give an initial value (inits) for each cycle")}
     if (sum(is.na(response))>0) {
       stop("Missing data in the dependent variable not allowed")}
     if (sum(cycles<=0)>0) {stop("Cycles cannot be <=0")}
@@ -44,10 +42,12 @@
     n<-length(response);
     k<-length(cycles);
     kk<-2*(k+1);
-    vartheta<-sd(response) # Initial estimates of var theta
+    ## Get initial values 
+    good.inits=nscosinor.initial(data=data,response=response,lambda=lambda,tau=tau,n.season=k)
+    vartheta<-sqrt(good.inits[1]) # Initial estimates of var theta
     w<-vector(length=k,mode="numeric")
     for (index in 1:k){ 
-      w[index]<-inits[k] # Initial estimate of lambda (w)
+      w[index]<-good.inits[2] # Initial estimate of lambda (w)
     }
     ## Empty chain matrices and assign initial values
     ampchain<-matrix(0,niters+1,k)
@@ -59,8 +59,8 @@
     varthetachain[1]<-vartheta
     cmean<-rep(10,kk) # starting value for C_j
     for (iter in 1:niters){ 
-      result<-kalfil(response,f=cycles,varthetachain[iter],
-                     lchain[iter,],tau=tau,lambda=lambda,cmean=cmean)
+      result<-kalfil(response,f=cycles,vartheta=varthetachain[iter],
+                     w=lchain[iter,],tau=tau,lambda=lambda,cmean=cmean)
       varthetachain[iter+1]<-result$vartheta 
       lchain[iter+1,]<-result$w 
       alphachain[,,iter]<-result$alpha 

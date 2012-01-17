@@ -5,7 +5,7 @@
 %%\alias{plot.nsCosinor}
 \title{Non-stationary cosinor}
 \description{Decompose a time series using a non-stationary cosinor for the seasonal pattern.}
-\usage{nscosinor(data, response, cycles, niters=1000, burnin=500, tau, inits,
+\usage{nscosinor(data, response, cycles, niters=1000, burnin=500, tau, 
                  lambda=1/12, div=50, monthly=TRUE, alpha=0.05)
 
 %%\method{print}{nsCosinor}(x, ...)
@@ -20,7 +20,6 @@
   \item{burnin}{number of MCMC samples discarded as a burn-in (default=500).}
   \item{tau}{vector of smoothing parameters, tau[1] for trend, tau[2] for 1st seasonal parameter, tau[3] for 2nd seasonal parameter, etc. Larger values of tau allow more change between observations and hence a
 greater potential flexibility in the trend and season.}
-  \item{inits}{vector of initial value(s) for the MCMC chain(s) for \code{std.season}. Initial values should be given for each seasonal cycle.}
   \item{lambda}{distance between observations (lambda=1/12 for monthly data, default).}
   \item{div}{divisor at which MCMC sample progress is reported (default=50).}
   \item{monthly}{TRUE for monthly data.}
@@ -69,12 +68,11 @@ Barnett, A.G., Dobson, A.J. (2004) Estimating trends and seasonality in coronary
 data(CVD)
 # model to fit an annual pattern to the monthly cardiovascular disease data
 f = c(12)
-inits = c(1)
 tau = c(130,10)
 \dontrun{res12 = nscosinor(data=CVD, response=adj, cycles=f, niters=5000,
-         burnin=1000, tau=tau, inits=inits)
+         burnin=1000, tau=tau)
 summary(res12)
 plot(res12)
 plot(res12$chains$amp)}
-\dontshow{res12 = nscosinor(data=CVD, response=adj, cycles=f, niters=50, burnin=10, tau=tau, inits=inits)}
+\dontshow{res12 = nscosinor(data=CVD, response=adj, cycles=f, niters=50, burnin=10, tau=tau)}
 }

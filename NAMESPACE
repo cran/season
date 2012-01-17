@@ -5,7 +5,8 @@ export(casecross, ciPhase, cipolygon, cosinor, flagleap, invyrfraction,
        print.Cosinor, print.monthglm, print.nsCosinor, print.summary.Cosinor,
        print.summary.monthglm, print.summary.nsCosinor, rinvgamma,
        seasrescheck, summary.casecross, summary.Cosinor, summary.monthglm,
-       summary.nsCosinor, wtest, yrfraction)
+       summary.nsCosinor, wtest, yrfraction,
+       aaft, nonlintest, third)
 S3method(print, casecross)
 S3method(print, Cosinor)
 S3method(print, monthglm)
@@ -14,6 +15,7 @@ S3method(print, nsCosinor)
 S3method(print, summary.Cosinor)
 S3method(print, summary.monthglm)
 S3method(print, summary.nsCosinor)
+S3method(print, nonlintest)
 S3method(summary, casecross)
 S3method(summary, Cosinor)
 S3method(summary, monthglm)
@@ -22,4 +24,5 @@ S3method(plot, Cosinor)
 S3method(plot, monthglm)
 S3method(plot, nsCosinor)
 S3method(plot, Monthmean)
+S3method(plot, nonlintest)
 importFrom(coda, mcmc)
