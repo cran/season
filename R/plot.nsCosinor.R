@@ -19,7 +19,7 @@ plot.nsCosinor<-function(x, ...){
     boxplot(x$residual~month,boxwex=0.4,col="grey90",xaxt='n',
             xlab="",ylab="Residual",main="Residuals by month")
     m.abb<-substr(month.abb,1,1)
-    axis(side=1,at=1:12,label=m.abb)
+    axis(side=1,at=1:12,labels=m.abb)
   }
   par(lwd=1,mai=c(0.32,0.32,0.82,0.12),cex=0.7) # c(bottom, left, top, right)
   cpgram(x$residual,main="Cumulative periodogram")

@@ -1,4 +1,4 @@
-e80562264e161397f9104b23a3f46420 *DESCRIPTION
+7b27352a8cc4d4b06c8b60999c2fd50b *DESCRIPTION
 52a33b2912c8d33beb2242c58a21040d *NAMESPACE
 b7556ad2f4c0a4ccf903cfa9c80bf4fe *R/aaft.R
 5bdd79067335e46cd8d17300aa9085bd *R/casecross.R
@@ -18,10 +18,10 @@ a1f40060090e326b2233eb509b06b24c *R/monthmean.R
 eb41388f37f18cfea5b7b89ef33fc393 *R/peri.R
 98cca90a3c8982d9b28f67e80214a7ea *R/phasecalc.R
 5db9b2093cc53ce27cc46b8087818fce *R/plot.Cosinor.R
-e85d6b502608d698fc033f3d900fe441 *R/plot.Monthmean.R
+68e77893529ad6307c50088ea6baa875 *R/plot.Monthmean.R
 2a037ef343decd534160dbaaf7e8018b *R/plot.monthglm.R
 4ac59f3197f5a1f8fcb15a51cbbd2b66 *R/plot.nonlintest.R
-2f98083127721a1055e2775332659a14 *R/plot.nsCosinor.R
+c2ba7762d7f5b593706496aa68c6ce18 *R/plot.nsCosinor.R
 fa1a38ee4cf375bfb1887004ee4d1668 *R/plotCircle.R
 903755a8d35f6a5ce777f6ea381043ec *R/plotCircular.R
 00cdd97325b546c98cb2561f16e8b75f *R/plotMonth.R
