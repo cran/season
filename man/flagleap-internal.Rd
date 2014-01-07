@@ -16,7 +16,3 @@
   \item{ndaysmonth}{number of days in the month (either 28, 29, 30 or 31).}
 }
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
-\examples{
-data(CVD)
-days = flagleap(data=CVD)
-}

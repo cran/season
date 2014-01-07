@@ -22,6 +22,8 @@
   From Queensland Health (\url{http://www.health.qld.gov.au/}).
 }
 \examples{
+\donttest{
 data(stillbirth)
 table(stillbirth$month, stillbirth$stillborn)
+}
 }

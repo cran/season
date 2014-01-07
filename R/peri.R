@@ -1,6 +1,8 @@
 # Calculates the periodogram
 'peri'<-function(data,adjmean=TRUE,plot=TRUE){
-  op <- par(no.readonly = TRUE) # the whole list of settable par's.
+  
+  xaxis <- yaxis <- NULL # Setting some variables to NULL first (for R CMD check)
+  
   if(adjmean==TRUE) adjust<-mean(data) else adjust<-0
   n<-length(data)
   nfft<-(n/2)+1
@@ -26,10 +28,17 @@
   }
 ## Plot
   if(plot==TRUE){
-    par(mfrow=c(2,1))
-    plot(f,peri,ylab='Periodogram',xlab='Frequency (radians)',type='h',xaxp=c(0,pi,4))
-    plot(c[3:nfft],peri[3:nfft],ylab='Periodogram',xlab='Cycles',type='h')
+    to.plot.one=data.frame(xaxis=f,yaxis=peri,type='Radians')
+    to.plot.two=data.frame(xaxis=c[2:nfft],yaxis=peri[2:nfft],type='Cycles')
+    to.plot=rbind(to.plot.one,to.plot.two)
+    gplot = ggplot(to.plot, aes(xaxis, yaxis,ymin=0,ymax=yaxis)) +
+            geom_linerange()+
+            theme_bw()+
+            xlab('Frequency in radians or cycles') +        
+            ylab('Periodogram') +        
+            facet_wrap(~ type,scales='free_x')
+    print(gplot)
   }
+# return  
   return(list(peri=peri,f=f,c=c,amp=amp,phase=phase))
-  par(op) # restore graphic settings
 }

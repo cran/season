@@ -7,6 +7,7 @@ plot.Cosinor<-function(x,...){
 ## Checks
   if (class(x)!="Cosinor"){stop("Object must be of class 'Cosinor'")} 
   op <- par(no.readonly = TRUE) # the whole list of settable par's.
+  on.exit(par(op)) # restore graphic settings
   f<-as.formula(x$call$formula)
   parts<-paste(f)
   ylab<-parts[2]
@@ -45,5 +46,4 @@ plot.Cosinor<-function(x,...){
         rug(x$date[o])
      }
   }
-  par(op) # restore graphic settings
 }

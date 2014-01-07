@@ -4,31 +4,32 @@
 summary.Cosinor<-function(object, digits=2, ...){
 ## Checks
   if (class(object)!="Cosinor"){stop("Object must be of class 'Cosinor'")} 
- cnames<-row.names(object$glm$coefficients)
+  s = summary(object$glm) # create summary
+ cnames<-row.names(s$coefficients)
  cindex<-sum(as.numeric(cnames=='cosw')*(1:length(cnames)))
  sindex<-sum(as.numeric(cnames=='sinw')*(1:length(cnames)))
 # amplitude and phase
- amp<-sqrt((object$glm$coefficients[cindex,1]^2)+(object$glm$coefficients[sindex,1]^2))
+ amp<-sqrt((s$coefficients[cindex,1]^2)+(s$coefficients[sindex,1]^2))
  addition<-''
- link<-object$glm$family$link
- if (is.null(object$glm$family$link)){link<-' '}
+ link<-s$family$link
+ if (is.null(s$family$link)){link<-' '}
  if (link=='logit'){
-   p1<-exp(object$glm$coefficients[1,1])/(1+exp(object$glm$coefficients[1,1])) # back-transform amp
-   p2<-exp(object$glm$coefficients[1,1]+amp)/(1+exp(object$glm$coefficients[1,1]+amp)) # back-transform amp
+   p1<-exp(s$coefficients[1,1])/(1+exp(s$coefficients[1,1])) # back-transform amp
+   p2<-exp(s$coefficients[1,1]+amp)/(1+exp(s$coefficients[1,1]+amp)) # back-transform amp
    amp<-p2-p1
    addition<-"(probability scale)"
  }
  if (link=='cloglog'){
-   p1<-1-exp(-exp(object$glm$coefficients[1,1]))
-   p2<-1-exp(-exp(object$glm$coefficients[1,1]+amp))
+   p1<-1-exp(-exp(s$coefficients[1,1]))
+   p2<-1-exp(-exp(s$coefficients[1,1]+amp))
    amp<-p2-p1
    addition<-"(probability scale)"
  }
  if (link=='log'){
-   amp<-exp(object$glm$coefficients[1,1]+amp)-exp(object$glm$coefficients[1,1])
+   amp<-exp(s$coefficients[1,1]+amp)-exp(s$coefficients[1,1])
    addition<-"(absolute scale)"
  }
- phaser<-phasecalc(cosine=object$glm$coefficients[cindex,1],sine=object$glm$coefficients[sindex,1]);
+ phaser<-phasecalc(cosine=s$coefficients[cindex,1],sine=s$coefficients[sindex,1]);
 # convert radian phase to a date
  phase<- invyrfraction(frac=phaser/(2*pi),type=object$call$type,text=object$call$text)
 # reverse phase (low)
@@ -37,7 +38,7 @@ summary.Cosinor<-function(object, digits=2, ...){
  if (lphaser>(2*pi)) { lphaser<-lphaser-(2*pi)}
  lphase<- invyrfraction(frac=lphaser/(2*pi),type=object$call$type,text=object$call$text)
 # statistical signficance
- toreport<-rbind(object$glm$coefficients[cindex,],object$glm$coefficients[sindex,])
+ toreport<-rbind(s$coefficients[cindex,],s$coefficients[sindex,])
  significant<- as.logical(sum(toreport[,4]<(object$call$alpha/2)))
 # returns
  ret<-list()

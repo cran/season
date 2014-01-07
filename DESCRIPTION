@@ -1,17 +1,30 @@
 Package: season
-Type: Package
+Version: 0.3-3
+Date: 2014-01-07
 Title: Seasonal analysis of health data
-Version: 0.3-2
-Date: 2012-08-03
-Author: Adrian Barnett <a.barnett@qut.edu.au>, Peter Baker
-        <p.baker1@uq.edu.au>
+Author: Adrian Barnett and Peter Baker
 Maintainer: Adrian Barnett <a.barnett@qut.edu.au>
-Description: Routines for the seasonal analysis of health data,
-        including regression models, time-stratified case-crossover,
-        plotting functions and residual checks. Thanks to Yuming Guo
-        for checking the case-crossover code.
-Depends: R (>= 2.13.0), lattice, MASS, mgcv, survival, coda
+Depends: R (>= 3.0.1), ggplot2 (>= 0.9.3), MASS, mgcv, survival, coda
 License: GPL (>= 3)
-Packaged: 2012-08-03 06:52:47 UTC; pete
+Description: Routines for the seasonal analysis of health data,
+    including regression models, time-stratified case-crossover,
+    plotting functions and residual checks. Thanks to Yuming Guo
+    for checking the case-crossover code.
+Collate: 'aaft.R' 'casecross.R' 'ciPhase.R' 'cipolygon.R' 'cosinor.R'
+        'createAdj.R' 'flagleap.R' 'invyrfraction.R' 'kalfil.R'
+        'monthglm.R' 'monthmean.R' 'nochars.R' 'nonlintest.R'
+        'nscosinor.R' 'nscosinor.initial.R' 'peri.R' 'phasecalc.R'
+        'plot.Cosinor.R' 'plot.Monthmean.R' 'plot.monthglm.R'
+        'plot.nonlintest.R' 'plot.nsCosinor.R' 'plotCircle.R'
+        'plotCircular.R' 'plotMonth.R' 'print.Cosinor.R'
+        'print.Monthmean.R' 'print.casecross.R' 'print.monthglm.R'
+        'print.nonlintest.R' 'print.nsCosinor.R'
+        'print.summary.Cosinor.R' 'print.summary.monthglm.R'
+        'print.summary.nsCosinor.R' 'rinvgamma.R' 'seasrescheck.R'
+        'sinusoid.R' 'summary.Cosinor.R' 'summary.casecross.R'
+        'summary.monthglm.R' 'summary.nsCosinor.R' 'third.R' 'wtest.R'
+        'yrfraction.R'
+Packaged: 2014-01-13 03:37:15 UTC; barnetta
+NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2012-08-05 06:02:42
+Date/Publication: 2014-01-13 08:25:23

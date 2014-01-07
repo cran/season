@@ -4,8 +4,6 @@
 
 # set up variables and matrices
 nscosinor.initial=function(data,response,tau,lambda=1/12,n.season){
-attach(data, warn.conflicts = FALSE)
-on.exit(detach(data))
 k<-1; # Assume just one season
 kk<-2*(k+1);
 n<-nrow(data);
@@ -15,7 +13,8 @@ G<-matrix(0,kk,kk);
 G[1,1]=1; G[1,2]=lambda; G[2,2]=1; 
 # linear model
 time=1:n
-model=glm(response~time,data=data)
+vector.response=subset(data,select=response)[,1] # replaced attach
+model=glm(vector.response~time)
 ## put predictions into alpha
 # 1. trend
 alpha_j[1,2:(n+1)]=fitted(model)
@@ -26,7 +25,7 @@ alpha_j[3,2:(n+1)]=(sdr/10)*cos(2*pi*(1:n+1)/12) # sinusoid with amplitude equal
    se<-matrix(0,n); # squared error
    alphase<-matrix(0,n-1,k);
    for (t in 2:(n+1)){ #<- time = 1 to n;
-      se[t-1]<-(response[t-1]-(t(F)%*%alpha_j[,t]))^2;
+      se[t-1]<-(vector.response[t-1]-(t(F)%*%alpha_j[,t]))^2; 
       if (t>2){ # <- 2 to n;
          past<-G%*%alpha_j[,t-1];
          for (index in 1:k){ 

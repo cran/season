@@ -14,6 +14,8 @@
 }
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 invyrfraction(c(0,0.5,0.99), type='daily')
 invyrfraction(c(0,0.5,0.99), type='monthly')
+}
 }

@@ -18,7 +18,9 @@
 Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 theta<-rnorm(n=2000,mean=0,sd=pi/50) # 2000 normal samples, centred on zero
 hist(theta,breaks=seq(-pi/8,pi/8,pi/30))
 ciPhase(theta)
+}
 }

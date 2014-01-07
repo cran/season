@@ -48,6 +48,7 @@
     Circular Data}. Cambridge University Press, Cambridge.}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 # months (dummy data)
 plotCircular(area1=seq(1,12,1),scale=0.7,labels=month.abb,dp=0)
 # weeks (random data)
@@ -63,4 +64,5 @@ plotCircular(area1=AFL$players,area2=AFL$expected,scale=0.72,
   labels=month.abb,dp=0,lines=TRUE, pieces.col=c("green","red"),
   auto.legend=list(labels=c("Obs","Exp"),title="# players"),
   main="Observed and Expected AFL players")
+}
 }

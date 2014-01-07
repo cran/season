@@ -27,4 +27,3 @@
 \seealso{\code{cosinor}, \code{plot.Cosinor}, \code{invyrfraction}}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 
-

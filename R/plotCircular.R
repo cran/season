@@ -1,6 +1,5 @@
 # plotCircular.R
 # circular plot
-# March 2009 - NOT REALLY - THIS NEEDS TO BE BETTER DOCUMENTED!
 ## Changes
 ## 7/2/10: incorporated titles/axes labekls/colour setting/auto legend
 

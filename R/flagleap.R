@@ -1,12 +1,10 @@
 # flagleap.R
 # function to flag leap years/months in a range of dates
-# March 2009, updated April 2010
+# Jan 2014
 
 flagleap<-function(data,report=TRUE,matchin=FALSE){
-  attach(data,warn.conflicts=FALSE)
-  on.exit(detach(data))
   n<-nrow(data)
-  yrmon<-year+((month-1)/12); # used later
+  yrmon<-data$year+((data$month-1)/12); # used later
   startyr<-min(data$year)
   stopyr<-max(data$year)
   startdate<-as.numeric(ISOdate(startyr,1,1))/(60*60*24) # start on 1st Jan
@@ -38,6 +36,6 @@ flagleap<-function(data,report=TRUE,matchin=FALSE){
 }
 
 # example
-# days<-flagleap(data=elderly)
+# days<-flagleap(data=CVD)
 
 

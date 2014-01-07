@@ -31,8 +31,10 @@
 } 
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 # Nearest neighbour matrix for 5 time points
 x = c(NA,1,NA,NA,NA)
 (V = toeplitz(x))
 createAdj(V)
+}
 }

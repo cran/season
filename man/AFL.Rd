@@ -19,7 +19,9 @@
   Dates of birth from Wikipedia (\url{http://en.wikipedia.org/wiki/Australian_Football_League}).
 }
 \examples{
+\donttest{
 data(AFL)
 barplot(AFL$players, names.arg=month.abb)
+}
 }
 \keyword{datasets}

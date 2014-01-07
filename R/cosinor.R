@@ -2,21 +2,20 @@
 # cosinor function using a GLM
 # available link functions = identity, log, logit, cloglog
 # date = date for daily data, month for monthly data
-# type =  monthly/daily
+# type =  monthly/weekly/daily
 # phase results based on 1 cycle per year
-# Oct 2011
+# Jan 2014
 
 cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
                   cycles=1, rescheck=FALSE, type='daily', offsetmonth=FALSE,
                   offsetpop=NULL,text=TRUE){
-
   ## checks
+  classes = lapply(data, class) # classes of all variables
+  this.class=as.character(classes[which(names(data)==date)]) # also used later
   if (!is.logical(offsetmonth)){
     stop("Error: 'offsetmonth' must be of type logical")}
-  if (type!='daily'&type!='monthly'){stop("type must be daily or monthly")}
-  attach(data,warn.conflicts=FALSE)
-  on.exit(detach(data))
-  if (type=='daily'&class(date)!='Date'){
+  if (type!='daily'&type!='weekly'&type!='monthly'){stop("type must be daily, weekly or monthly")}
+  if (type=='daily'&this.class!='Date'){
     stop("date variable must be of class Date when type='daily'")}
   if (alpha<=0|alpha>=1){stop("alpha must be between 0 and 1")}
 
@@ -30,12 +29,11 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
   ## make the formula
   parts<-paste(formula)
   f<-as.formula(paste(parts[2],parts[1],parts[3:length(formula)],'+cosw+sinw'))
-  dep<-parts[2] # dependent variable
-  index<-sum((names(data)==dep)*(1:ncol(data)))
-  slimdata<-data[,index]
 
   ## get the year fraction
-  frac<-yrfraction(date,type=type)
+  to.frac=subset(data,select=date)[,1]
+  class(to.frac)=this.class # return to class (needed for date class)
+  frac<-yrfraction(to.frac,type=type) # 
   data$cosw<-cos(frac*2*pi*cycles)
   data$sinw<-sin(frac*2*pi*cycles)
   newdata<-data.frame(cosw=data$cosw,sinw=data$sinw) # used later
@@ -47,7 +45,7 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
     moff=days$ndaysmonth/(365.25/12) # days per month divided by average month length
   }
   offset<-log(poff*moff)
-                                        # generalized linear model
+  # generalized linear model
   model<-glm(f,data=data,family=family,offset=offset)
   s<-summary(model)
   res<-residuals(model)
@@ -66,7 +64,7 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
                                         # return
   toret<-list()
   toret$call<-call
-  toret$glm<-s
+  toret$glm<-model # changed to model rather than summary
   toret$fitted.plus<-fitted
   toret$fitted.values<-pred
   toret$residuals<-res

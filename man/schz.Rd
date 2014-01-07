@@ -20,9 +20,11 @@
   From Prof John McGrath and colleagues, The University of Queensland, Brisbane.
 }
 \examples{
+\donttest{
 data(schz)
 plot(schz$yrmon, schz$SczBroad, type='o', xlab='Date',
      ylab='Number of schizophrenia births')
+}
 }
 \keyword{datasets}
 

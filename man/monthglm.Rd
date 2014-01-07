@@ -6,7 +6,7 @@
   variable of month.}
 \usage{
 monthglm(formula, data, family=gaussian(), refmonth=1,
-         monthvar='month',offsetmonth=FALSE, offsetpop=NULL) 
+         monthvar='month',offsetmonth=FALSE, offsetpop=NULL)
 \method{print}{monthglm}(x, ...)
 }
 \arguments{
@@ -34,14 +34,14 @@ monthglm(formula, data, family=gaussian(), refmonth=1,
 \details{Month is fitted as a categorical variable as part of a
   generalized linear model. Other independent variables can be added to
   the right-hand side of \code{formula}.
-  
+
   This model is useful for examining non-sinusoidal seasonal
   patterns. For sinusoidal seasonal patterns see \code{\link{cosinor}}.
-  
+
   The data frame should contain the integer months and the year as a 4 digit number. These are used to calculate the number of days in each month accounting for leap years.
 }
 \value{
-  \item{call}{the original call to the monthglm function.} 
+  \item{call}{the original call to the monthglm function.}
   \item{fit}{GLM model.}
   \item{fitted}{fitted values.}
   \item{residuals}{residuals.}
@@ -51,8 +51,10 @@ monthglm(formula, data, family=gaussian(), refmonth=1,
 \references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 data(CVD)
 mmodel = monthglm(formula=cvd~1 ,data=CVD, family=poisson(),
-                  offsetpop=pop/100000, offsetmonth=TRUE)
+                  offsetpop=expression(pop/100000), offsetmonth=TRUE)
 summary(mmodel)
+}
 }

@@ -7,5 +7,5 @@ print.Cosinor<-function(x, ...){
   if (class(x)!="Cosinor"){stop("Object must be of class 'Cosinor'")} 
 
   ## Use GLM function ###
-  print.glm(x$glm, ...)
+  print(x$glm, ...)
 } # end of function

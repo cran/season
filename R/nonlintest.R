@@ -2,7 +2,7 @@
 # Dec 2011
 # Time domain statistic for non-linearity (copied from Matlab code)
 # Bootstraps using AAFT methods then compares observed third order moment with expected
-# For more details see: Barnett & Wolff, “A Time-Domain Test for Some Types of Nonlinearity,” IEEE transactions on signal processing, Vol 53, No 1, January 2005
+# For more details see: Barnett & Wolff, A Time-Domain Test for Some Types of Nonlinearity, IEEE transactions on signal processing, Vol 53, No 1, January 2005
 ## Inputs
 # data - series as a column vector
 # n.lag - number of third order moment lags to compute
@@ -33,7 +33,7 @@ Xthird[1,1]=0; # Remove skewness;
 
 # Get n.boot*3 surrogates using the AAFT method
 # First n.boot for initial limits 2nd & 3rd n.boot for bootstrap limits
-aaftsers=aaft(Xdiff,n.sur=n.boot*3);
+aaftsers=aaft(Xdiff,nsur=n.boot*3);
 
 # Run each series through the third order moment;
 aaftthird=array(0,dim=c(n.lag+1,n.lag+1,n.boot*3));

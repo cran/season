@@ -1,23 +1,23 @@
 # aaft.R
-# AAFT (Amplitude Adjusted Fourier Transform) - copied from Matlab code
+# AAFT (Amplitude Adjusted Fourier Transform), copied from Matlab code
 # Jan 2012
-# For more details see: D. Kugiumtzis, “Surrogate data test for nonlinearity including monotonic transformations,” Phys. Rev. E, vol. 62, no. 1, 2000.
-# generates surrogate data for a given time series 'data' using the AAFT  
+# For more details see: D. Kugiumtzis, Surrogate data test for nonlinearity including monotonic transformations, Phys. Rev. E, vol. 62, no. 1, 2000.
+# generates surrogate data for a given time series data using the AAFT  
 ## INPUT:
 # - data        : The original time series (column vector)
-# - n.sur      : The number of surrogate data to be generated 
+# - nsur      : The number of surrogate data to be generated 
 ## OUTPUT:
-# - surrogates        : The AAFT surrogate data (matrix of 'n.sur' columns)
+# - surrogates        : The AAFT surrogate data (matrix of nsur columns)
 
-aaft=function(data, n.sur){
+aaft = function(data, nsur){
 n = length(data);
 # The following gives the rank order, ixV
 ixV=order(data);
 rxV=rank(data); # ranks
 oxV=data[ixV] # smallest to largest
 # ===== AAFT algorithm 
-surrogates=matrix(data=0,n,n.sur);
-for (count in 1:n.sur){
+surrogates=matrix(data=0,n,nsur);
+for (count in 1:nsur){
    # Rank ordering white noise with respect to data
    rV = rnorm(n);  # random N(0,1)
    orV=rV[order(rV)]; # in order, smallest to largest
@@ -40,7 +40,5 @@ for (count in 1:n.sur){
    iyftV = rank(yftV); # Rank ordering data with respect to yftV 
    surrogates[,count] = oxV[iyftV];  # surrogates is the AAFT surrogate of data
 } # end of loop
-
 return(surrogates)
-
 } # end of function

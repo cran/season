@@ -19,7 +19,9 @@ The third-order moment is useful for testing for non-linearity in a time series,
 }
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 data(CVD)
-third(CVD$cvd,n.lag=12)
+third(CVD$cvd, n.lag=12)
+}
 }
 

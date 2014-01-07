@@ -24,14 +24,11 @@ time).
   are based on health data, but the functions are equally applicable to
   any data with a seasonal pattern.
 
-  In the next version we hope to make the nscosinor function faster and
-  improve the plots.
-
   \tabular{ll}{
     Package: \tab season\cr
     Type: \tab Package\cr
-    Version: \tab 0.2-6\cr
-    Date: \tab 2011-10-23\cr
+    Version: \tab 0.3-3\cr
+    Date: \tab 2014-01-07\cr
     License: \tab GPL (>= 3)\cr
   }
 }
@@ -45,6 +42,8 @@ time).
   ts
   models}
 \examples{
+\donttest{
 ## see examples for \code{\link{cosinor}}, \code{\link{monthglm}},
 ##                  \code{\link{nscosinor}} and \code{\link{casecross}}
+}
 }

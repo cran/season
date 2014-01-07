@@ -30,6 +30,8 @@ Returns an object of class \dQuote{nonlintest} with the following parts:
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \references{Barnett AG \& Wolff RC (2005) A Time-Domain Test for Some Types of Nonlinearity, \emph{IEEE Transactions on Signal Processing}, vol 53, pages 26--33}
 \examples{
+\donttest{
 data(CVD)
 \dontrun{test.res=nonlintest(data=CVD$cvd, n.lag=4, n.boot=1000)}
+}
 }

@@ -1,7 +1,9 @@
-### Plot the monthly data
+### Plot the results of the non-linear test
 
 plot.nonlintest<-function(x, ...){
 
+  z <- NULL # Setting some variables to NULL first (for R CMD check)
+    
   ## Check
   if (class(x) != "nonlintest"){
     stop("Object must be of class 'nonlintest'")
@@ -19,7 +21,12 @@ if(max(abs(x$region))!=0){
 		 counter=counter+1;
       }
    }
-   print(wireframe(z~r*s,data=for.plot,drape=T,scales=list(arrows=F)),xlab='r',ylab='s',zlab='Area outside the test limits', ...)
+
+     gplot=ggplot(for.plot, aes(r, s, z = z))+
+           stat_contour()+
+           geom_tile(aes(fill = z))
+     print(gplot)
+ #zlab='Area outside the test limits', ...)
  #  mtext(side=3,'Points of 3rd order moment that exceed limits');
 } # end of if
 } # end of function

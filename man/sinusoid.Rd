@@ -13,5 +13,5 @@
 \references{Barnett, A.G., Dobson, A.J. (2010) \emph{Analysing Seasonal Health Data}. Springer.}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
-sinusoid(amplitude=1, frequency=1, phase=1)
+\donttest{sinusoid(amplitude=1, frequency=1, phase=1)}
 }

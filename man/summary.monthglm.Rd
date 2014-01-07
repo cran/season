@@ -32,4 +32,3 @@
   shown as oddsratios.}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 
-

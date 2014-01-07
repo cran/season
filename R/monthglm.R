@@ -1,12 +1,10 @@
 ## monthglm.R
 ## fit a GLM using month as a factor
 ## option to add offset to control for uneven number of days
-## Oct 2011
+## Jan 2014
 
 monthglm<-function(formula,data,family=gaussian(),refmonth=1,
                    monthvar='month',offsetmonth=FALSE,offsetpop=NULL){
-  attach(data,warn.conflicts=FALSE)
-  on.exit(detach(data))
   ## checks
   if (refmonth<1|refmonth>12){stop("Reference month must be between 1 and 12")}
   ## original call with defaults (see amer package)
@@ -14,7 +12,8 @@ monthglm<-function(formula,data,family=gaussian(),refmonth=1,
   frmls <- formals(deparse(ans[[1]]))
   add <- which(!(names(frmls) %in% names(ans)))
   call<-as.call(c(ans, frmls[add]))
-  monthvar=get(monthvar)
+
+  monthvar=with(data,get(monthvar))
   cmonthvar=class(monthvar)
   ## If month is a character, create the numbers
   if(cmonthvar%in%c('factor','character')){
@@ -39,11 +38,9 @@ monthglm<-function(formula,data,family=gaussian(),refmonth=1,
   parts<-paste(formula)
   f<-as.formula(paste(parts[2],parts[1],parts[3:length(formula)],'+months'))
   dep<-parts[2] # dependent variable
-  index<-sum((names(data)==dep)*(1:ncol(data)))
-  slimdata<-data[,index]
   days<-flagleap(data=data,report=FALSE,matchin=T) # get the number of days in each month
   l<-nrow(data)
-  if(is.null(offsetpop)==FALSE){poff=offsetpop} else{poff=rep(1,l)}
+  if(is.null(offsetpop)==FALSE){poff=with(data,eval(offsetpop))} else{poff=rep(1,l)} # 
   if(offsetmonth==TRUE){moff=days$ndaysmonth/(365.25/12)} else{moff=rep(1,l)} # days per month divided by average month length
 ###  data$off<-log(poff*moff)
   off<-log(poff*moff)  # 

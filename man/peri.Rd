@@ -17,7 +17,9 @@
 }
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 data(CVD)
-peri(CVD$cvd)
+p = peri(CVD$cvd)
+}
 }
 

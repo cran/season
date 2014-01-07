@@ -1,5 +1,5 @@
 ## print.nonlintest.R
-## Prints basic results from monthglm
+## Prints basic results from nonlintest
 print.nonlintest<-function(x, ...){
   ## Check
   if (class(x) != "nonlintest"){

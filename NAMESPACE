@@ -1,28 +1,70 @@
-export(casecross, ciPhase, cipolygon, cosinor, flagleap, invyrfraction,
-       kalfil,monthglm, nochars, nscosinor, peri, phasecalc, plotCircle,
-       plotCircular,monthmean,createAdj, plotMonth, sinusoid,
-       plot.Cosinor,plot.monthglm, plot.nsCosinor, print.casecross,
-       print.Cosinor, print.monthglm, print.nsCosinor, print.summary.Cosinor,
-       print.summary.monthglm, print.summary.nsCosinor, rinvgamma,
-       seasrescheck, summary.casecross, summary.Cosinor, summary.monthglm,
-       summary.nsCosinor, wtest, yrfraction,
-       aaft, nonlintest, third)
+export(aaft, 
+       casecross, 
+       ciPhase, 
+       cipolygon, 
+       createAdj, 
+       cosinor, 
+       flagleap, 
+       invyrfraction,
+       kalfil,
+       monthglm, 
+       monthmean,
+       nochars, 
+       nonlintest, 
+       nscosinor.initial, 
+       nscosinor,
+       peri, 
+       phasecalc, 
+       plot.Cosinor,
+       plot.monthglm, 
+       plot.Monthmean, 
+       plot.nonlintest,
+       plot.nsCosinor, 
+       plotCircle,
+       plotCircular,
+       plotMonth, 
+       print.casecross,
+       print.Cosinor, 
+       print.monthglm, 
+       print.Monthmean, 
+       print.nonlintest,
+       print.nsCosinor, 
+       print.summary.Cosinor,
+       print.summary.monthglm, 
+       print.summary.nsCosinor, 
+       rinvgamma,
+       seasrescheck, 
+       sinusoid,
+       summary.casecross, 
+       summary.Cosinor, 
+       summary.monthglm,
+       summary.nsCosinor, 
+       third,
+       wtest, 
+       yrfraction)
 S3method(print, casecross)
 S3method(print, Cosinor)
 S3method(print, monthglm)
 S3method(print, Monthmean)
+S3method(print, nonlintest)
 S3method(print, nsCosinor)
 S3method(print, summary.Cosinor)
 S3method(print, summary.monthglm)
 S3method(print, summary.nsCosinor)
-S3method(print, nonlintest)
 S3method(summary, casecross)
 S3method(summary, Cosinor)
 S3method(summary, monthglm)
 S3method(summary, nsCosinor)
 S3method(plot, Cosinor)
 S3method(plot, monthglm)
-S3method(plot, nsCosinor)
 S3method(plot, Monthmean)
 S3method(plot, nonlintest)
+S3method(plot, nsCosinor)
+import(ggplot2)
+importFrom(survival,coxph)
+import(MASS)
+import(mgcv)
 importFrom(coda, mcmc)
+importFrom(stats,fft)
+#if(getRversion() >= "2.15.1"){utils::globalVariables(c("xaxis", "yaxis"))}
+

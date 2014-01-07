@@ -7,6 +7,3 @@
   \item{text}{text string.}
 }
 \author{Adrian Barnett \email{a.barnett@qut.edu.au}}
-\examples{
-nochars('adrian.(0)')
-}

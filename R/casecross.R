@@ -7,9 +7,8 @@
 casecross<-function(formula, data, exclusion=2, stratalength=28,
                     matchdow=FALSE, usefinalwindow=FALSE, matchconf='',
                     confrange=0,stratamonth=FALSE){
-  attach(data, warn.conflicts = FALSE)
+  outcome <- dow <- case <-timex <- dow.x <- dow.y <- matchday.x <- matchday.y <- windownum.x <- windownum.y <- NULL # Setting some variables to NULL first (for R CMD check)
   thisdata<-data
-  detach(data)
   ## Checks
   if (class(thisdata$date)!="Date"){
     stop("date variable must be in date format, see ?Dates")} 

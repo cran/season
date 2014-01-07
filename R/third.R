@@ -1,15 +1,18 @@
 ## third.R
 ## estimate the third order moment
-## Dec 2011
+## Jan 2014
 # inputs
 #       data       - time-series
 #       n.lag    - number of lags, max = length of time series
 #       centre	  - centre series by subtracting mean (TRUE/FALSE)
 #       outmax  - display lags of maxima and minima (TRUE/FALSE)
-#       plot  - wireframe plot of the third order moment (TRUE/FALSE)
+#       plot  - ggplot plot of the third order moment (TRUE/FALSE)
+
 
 third=function(data,n.lag,centre=TRUE,outmax=TRUE,plot=TRUE){
 
+  xaxis <- yaxis <- zaxis <- NULL # Setting some variables to NULL first (for R CMD check)
+  
   nsamp=length(data);
   if(nsamp<10){cat('warning n<10\n')}
 # ---------------- cumulants in non-redundant region -----------------
@@ -26,7 +29,7 @@ third=function(data,n.lag,centre=TRUE,outmax=TRUE,plot=TRUE){
              XXX[n.lag+1+d-k,n.lag+1-k]=XXX[d+n.lag+1,k+n.lag+1]; # Symmetry
              XXX[n.lag+1-k,n.lag+1+d-k]=XXX[d+n.lag+1,k+n.lag+1]; # Symmetry
    	         if(plot==TRUE){
-			    frame=data.frame(x=d,y=k,z=XXX[d+n.lag+1,k+n.lag+1])
+			    frame=data.frame(xaxis=d,yaxis=k,zaxis=XXX[d+n.lag+1,k+n.lag+1])
 			    if(count==0){for.plot=frame}else{for.plot=rbind(for.plot,frame)}
 				count=count+1
 			 }
@@ -45,7 +48,10 @@ third=function(data,n.lag,centre=TRUE,outmax=TRUE,plot=TRUE){
 
 # Lags of minima and maxima
   if(plot==TRUE){
-     print(wireframe(z~x*y,data=for.plot,drape=T,scales=list(arrows=F)))
+     gplot=ggplot(for.plot, aes(xaxis, yaxis, z = zaxis))+
+           stat_contour()+
+           geom_tile(aes(fill = zaxis))
+     print(gplot)
   }
   
   to.return=list()

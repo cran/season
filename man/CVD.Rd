@@ -17,7 +17,7 @@
       \eqn{year+(month-1)/12}}
     \item{\code{cvd}}{monthly number of CVD deaths}
     \item{\code{tmpd}}{mean monthly temperature (degrees Fahrenheit)}
-    \item{\code{pop}}{Los Angeles population aged 75+ in the year 2000}
+    \item{\code{pop}}{Los Angeles population aged 75+ in the year 2000 (this value is constant as only one year was available, but in general the population will (of course) change over time)}
     \item{\code{ndaysmonth}}{number of days in each month (used as an offset)}
     \item{\code{adj}}{adjusted number of CVD deaths per month using a
       standardised month length. Monthly number of CVD deaths multiplied by (365.25/12)/ndaysmonth.
@@ -34,9 +34,11 @@
     Pollution Study, Part I: Methods and Methodologic Issues}.
   Research Report 94, Health Effects Institute, Cambridge MA.}
 \examples{
+\donttest{
 data(CVD)
 plot(CVD$yrmon, CVD$cvd, type='o', xlab='Date',
      ylab='Number of CVD deaths per month')
+}
 }
 \keyword{datasets}
 

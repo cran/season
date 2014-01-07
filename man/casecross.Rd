@@ -28,10 +28,10 @@
   Control days that are close to the case day may have similar levels of the independent variable(s). To reduce this correlation it is possible to place an \code{exclusion} around the cases.
   The default is 2, which means that the smallest gap between a case and control will be 3 days.
 
-  To remove any confounding by day of the week it is possible to additionally match by day of the week (\code{matchdow}), although this often reduces the number of available controls. This matching is in addition to the strata matching.
+  To remove any confounding by day of the week it is possible to additionally match by day of the week (\code{matchdow}), although this usually reduces the number of available controls. This matching is in addition to the strata matching.
 
   It is possible to additionally match case and control days by an important confounder (\code{matchconf}) in order to remove its effect. Control days are matched to case days if they are: 
-  i) in the same strata, ii) have the same day of the week if \code{matchdow=TRUE}, iii) have a value of \code{matchconf} that is within \eqn{\pm} \code{confrange} of the value of \code{matchconf} on the case day. If the range is set too narrow then the number of available controls will become too small, which in turn means the number of case days with at least one control day is compromised.
+  i) in the same strata, ii) have the same day of the week if \code{matchdow=TRUE}, iii) have a value of \code{matchconf} that is within plus/minus \code{confrange} of the value of \code{matchconf} on the case day. If the range is set too narrow then the number of available controls will become too small, which in turn means the number of case days with at least one control day is compromised.
 
   The method uses conditional logistic regression (see \code{\link{coxph}} and so the parameter estimates are odds ratios.)
 
@@ -50,6 +50,7 @@
 \seealso{\code{summary.casecross}, \code{coxph}}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
 \examples{
+\donttest{
 # cardiovascular disease data
 data(CVDdaily)
 CVDdaily=subset(CVDdaily,date<=as.Date('1987-12-31')) # subset for example
@@ -63,4 +64,5 @@ summary(model2)
 model3 = casecross(cvd ~ o3mean+Mon+Tue+Wed+Thu+Fri+Sat, data=CVDdaily,
                    matchconf='tmpd', confrange=1)
 summary(model3)
+}
 }

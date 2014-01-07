@@ -24,7 +24,6 @@
 `nscosinor` <-
   function(data,response,cycles,niters=1000,burnin=500,tau,
            lambda=1/12,div=50,monthly=TRUE,alpha=0.05){
-    attach(data, warn.conflicts = FALSE)
     names<-names(data)
     yearyes<-sum(names=='year')
     monthyes<-sum(names=='month')
@@ -32,14 +31,15 @@
       stop("Data needs to contain numeric year and month variables")}
     if (length(tau)!=length(cycles)+1) {
       stop("Need to give a smoothing parameter (tau) for each cycle, plus one for the trend")}
-    if (sum(is.na(response))>0) {
+    resp=subset(data,select=response)[,1] # instead of attach
+    if (sum(is.na(resp))>0) {
       stop("Missing data in the dependent variable not allowed")}
     if (sum(cycles<=0)>0) {stop("Cycles cannot be <=0")}
     if (burnin>niters) {
       stop("Number of iterations must be greater than burn-in")}
 ###  was    yrmon<-year+((month-1)/12)
-    yrmon<-data$year+((data$month-1)/12)  #  GUESS ONLY
-    n<-length(response);
+    yrmon<-data$year+((data$month-1)/12)  # 
+    n<-length(resp);
     k<-length(cycles);
     kk<-2*(k+1);
     ## Get initial values 
@@ -59,7 +59,7 @@
     varthetachain[1]<-vartheta
     cmean<-rep(10,kk) # starting value for C_j
     for (iter in 1:niters){ 
-      result<-kalfil(response,f=cycles,vartheta=varthetachain[iter],
+      result<-kalfil(resp,f=cycles,vartheta=varthetachain[iter], # changed response to resp
                      w=lchain[iter,],tau=tau,lambda=lambda,cmean=cmean)
       varthetachain[iter+1]<-result$vartheta 
       lchain[iter+1,]<-result$w 
@@ -70,12 +70,14 @@
       ## Output iteration progress 
       if (iter%%div==0){cat("Iteration number",iter,"of",niters,"\n",sep=" ")}
     }
-    ## Get mean and percentiles of alpha (trend and season)
+    ## Get mean and percentiles of alpha (trend and season), and overall fitted values
     trend<-as.data.frame(matrix(0,n,3))
     season<-as.data.frame(matrix(0,n,3*k))
     oseason<-as.data.frame(matrix(0,n,3))
+    new.fitted<-as.data.frame(matrix(0,n,3))
     names(trend)<-c('mean','lower','upper')
     names(oseason)<-c('mean','lower','upper')
+    names(new.fitted)<-c('mean','lower','upper')
     allseasons<-matrix(data=NA,ncol=niters-burnin,nrow=n)
     snums<-((1:k)*2)+1
     for (i in 1:n){ 
@@ -87,6 +89,7 @@
     uprob=1-(alpha/2);
     lnum<-round((niters-burnin)*lprob);
     unum<-round((niters-burnin)*uprob);
+    for.fitted=allseasons+alphachain[1, 1:n,(burnin+1):niters]
     for (i in 1:n){ 
       trend$mean[i]<-mean(alphachain[1,i,burnin:niters])
       trend$lower[i]<-sum(as.numeric(rank(alphachain[1,i,burnin:niters])==lnum)*alphachain[1,i,burnin:niters])
@@ -101,6 +104,10 @@
       oseason$mean[i]<-mean(allseasons[i,])
       oseason$lower[i]<-sum(as.numeric(rank(allseasons[i,])==lnum)*allseasons[i,])
       oseason$upper[i]<-sum(as.numeric(rank(allseasons[i,])==unum)*allseasons[i,])
+      ## fitted values (with CIs)
+      new.fitted$mean[i]<-mean(for.fitted[i])
+      new.fitted$lower[i]<-sum(as.numeric(rank(for.fitted[i,])==lnum)*for.fitted[i,])
+      new.fitted$upper[i]<-sum(as.numeric(rank(for.fitted[i,])==unum)*for.fitted[i,])
     }
     names(season)<-rep(c('mean','lower','upper'),k)
     ## Time
@@ -108,7 +115,7 @@
     if (monthly!=TRUE){time<-1:n}
     ## Calculated fitted values and residuals
     fitted<-trend$mean+oseason$mean
-    res<-response-fitted # calculate the residuals
+    res<-resp-fitted # calculate the residuals
     ## original call with defaults (see amer package)
     ans <- as.list(match.call())
     frmls <- formals(deparse(ans[[1]]))
@@ -121,7 +128,8 @@
     toret$trend<-trend
     toret$season<-season
     toret$oseason<-oseason
-    toret$fitted.values<-fitted
+#    toret$fitted.values<-fitted # over-ride with values below
+    toret$fitted.values<-new.fitted
     toret$residuals<-res
     toret$n<-n
     toret$chains$std.error<-varthetachain
@@ -143,6 +151,5 @@
     toret$cycles<-cycles
     class(toret)<-'nsCosinor'
     return(toret)
-    detach(data)
   } # end of function
 
