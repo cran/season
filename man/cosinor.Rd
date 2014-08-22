@@ -61,6 +61,7 @@ data(CVD)
 res = cosinor(cvd~1, date='month', data=CVD, type='monthly',
               family=poisson(), offsetmonth=TRUE)
 summary(res)
+seasrescheck(res$residuals) # check the residuals
 # stillbirth data
 data(stillbirth)
 res = cosinor(stillborn~1, date='dob', data=stillbirth,

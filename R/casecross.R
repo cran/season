@@ -96,7 +96,7 @@ casecross<-function(formula, data, exclusion=2, stratalength=28,
     rowstorep<-c(rowstorep,these)
     casenum<-c(casenum,these[order(these)])
   }
-  controls<-cases[rowstorep[2:length(rowstorep)],] # out of memory
+  controls<-cases[rowstorep[2:length(rowstorep)],] # can fall over if there's missing data
   controls<-subset(controls,select=c(-case,-timex,-time,-outcome))
   # Replace case number
   controls$casenum<-casenum[2:length(rowstorep)]

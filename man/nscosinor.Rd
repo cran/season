@@ -5,15 +5,13 @@
 %%\alias{plot.nsCosinor}
 %%\alias{plot.nsCosinor.chains}
 %%\alias{plot.nsCosinor.residuals}
-\title{Non-stationary cosinor}
-\description{Decompose a time series using a non-stationary cosinor for the seasonal pattern.}
-\usage{nscosinor(data, response, cycles, niters=1000, burnin=500, tau,
-                 lambda=1/12, div=50, monthly=TRUE, alpha=0.05)
-
 %%\method{print}{nsCosinor}(x, ...)
 %%\method{summary}{nsCosinor}(x, ...)
 %%\method{plot}{nsCosinor}(x, ...)
-}
+\title{Non-stationary cosinor}
+\description{Decompose a time series using a non-stationary cosinor for the seasonal pattern.}
+\usage{nscosinor(data, response, cycles, niters=1000, burnin=500, tau,
+                 lambda=1/12, div=50, monthly=TRUE, alpha=0.05)}
 \arguments{
   \item{data}{a data frame.}
   \item{response}{response variable.}
@@ -72,8 +70,8 @@ data(CVD)
 # model to fit an annual pattern to the monthly cardiovascular disease data
 f = c(12)
 tau = c(130,10)
-\dontrun{res12 = nscosinor(data=CVD, response='adj', cycles=f, niters=50,
-         burnin=10, tau=tau)
+\dontrun{res12 = nscosinor(data=CVD, response='adj', cycles=f, niters=5000,
+         burnin=1000, tau=tau)
 summary(res12)
 plot(res12)
 }

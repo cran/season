@@ -28,7 +28,7 @@ flagleap<-function(data,report=TRUE,matchin=FALSE){
   if(matchin==TRUE){
      yrmon.days<-days$year+((days$month-1)/12);
      index<-yrmon.days>=min(yrmon)&yrmon.days<=max(yrmon);
-     cat('Number of index times ',sum(index),'\n');
+     if (report==TRUE){cat('Number of index times ',sum(index),'\n');}
      days<-days[index,]
   }
 # Finish

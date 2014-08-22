@@ -41,12 +41,12 @@ cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
   if(is.null(offsetpop)==FALSE){poff=offsetpop}
   moff=rep(1,nrow(data))
   if(offsetmonth==TRUE){
-    days<-flagleap(data=data,report=FALSE) # get the number of days in each month
-    moff=days$ndaysmonth/(365.25/12) # days per month divided by average month length
+    days = flagleap(data=data, report=FALSE, matchin=TRUE) # get the number of days in each month
+    moff = days$ndaysmonth/(365.25/12) # days per month divided by average month length
   }
   offset<-log(poff*moff)
   # generalized linear model
-  model<-glm(f,data=data,family=family,offset=offset)
+  model<-glm(f, data=data, family=family, offset=offset)
   s<-summary(model)
   res<-residuals(model)
 
