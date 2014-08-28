@@ -15,6 +15,12 @@ print.summary.Cosinor <- function(x, ...){
   cat('Amplitude =',round(x$amp,x$digits),x$amp.scale,'\n')
   cat('Phase:',x$phase,'\n')
   cat('Low point:',x$lphase,'\n')
-  cat('Significant seasonality based on adjusted significance level of',
-      x$alpha/2,' = ',x$significant,'\n', ...)
+  if(x$type=='hourly'){
+    cat('Significant circadian pattern based on adjusted significance level of',
+        x$alpha/2,' = ',x$significant,'\n', ...)
+  }
+  if(x$type!='hourly'){
+    cat('Significant seasonality based on adjusted significance level of',
+        x$alpha/2,' = ',x$significant,'\n', ...)
+  }
 }

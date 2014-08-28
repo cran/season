@@ -1,5 +1,5 @@
 ## plot.Cosinor.R
-## Oct 2009
+## Aug 2014
 ## NB: Needs a rewrite at some stage - ... is not used so
 ##     plot not as flexible as it might be
 
@@ -27,6 +27,15 @@ plot.Cosinor<-function(x,...){
         firsts<-as.numeric(ISOdate(month=1,day=1,year=years))/(24*60*60)
         axis(side=1,at=firsts,labels=years)
         rug(time[o])
+     }
+     if (x$call$type=='hourly'){
+       hours = unique(as.numeric(format(time[o],'%H')))
+       smonth = as.numeric(format(time[1],'%m')) # starting month
+       sday = as.numeric(format(time[1],'%d')) # starting day
+       syear = as.numeric(format(time[1],'%Y')) # starting year
+       firsts<-ISOdate(month=smonth,day=sday,year=syear,hour=hours)
+       axis(side=1,at=firsts,labels=hours)
+       rug(time[o])
      }
   }
   if (x$call$link=='logit'|x$call$link=='cloglog'){

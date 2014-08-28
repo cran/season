@@ -32,6 +32,11 @@ invyrfraction<-function(frac,type='daily',text=TRUE){
      if (text==TRUE){daym<-paste('Month =',round(month,1))}
      if (text==FALSE){daym<-month}
   }
+  if (type=='hourly'){
+    month<-(frac*24)+1;
+    if (text==TRUE){daym<-paste('Hour =',round(month,1))}
+    if (text==FALSE){daym<-month}
+  }
   return(daym)
 }
 

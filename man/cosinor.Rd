@@ -1,6 +1,6 @@
 \name{cosinor}
 \alias{cosinor}
-\title{Cosinor regression model for detecting seasonality}
+\title{Cosinor regression model for detecting seasonality in yearly data or circadian patterns in hourly data}
 \description{Fits a cosinor model as part of a generalized linear model.}
 \usage{cosinor(formula, date, data, family=gaussian() ,alpha=0.05, cycles=1,
                rescheck=FALSE, type='daily', offsetmonth=FALSE, offsetpop=NULL, text=TRUE)}
@@ -8,7 +8,7 @@
   \item{formula}{regression formula.}
   \item{date}{a date variable if type=\dQuote{daily}, or an integer
     between 1 and 53 if type=\dQuote{weekly}, or an integer
-    between 1 and 12 if type=\dQuote{monthly}.}
+    between 1 and 12 if type=\dQuote{monthly}, or a \link{POSIXct} date if type=\dQuote{hourly}.}
     \item{data}{data set as a data frame.}
   \item{family}{a description of the error distribution and link
     function to be used in the model. Available link functions:
@@ -19,7 +19,8 @@
     \code{\link{seasrescheck}}.}
   \item{type}{\dQuote{daily} for daily data (default), or
     \dQuote{weekly} for weekly data, or
-    \dQuote{monthly} for monthly data.}
+    \dQuote{monthly} for monthly data, or
+    \dQuote{hourly} for hourly data.}
   \item{offsetmonth}{include an offset to account for the uneven number
     of days in the month (TRUE/FALSE). Should be used for monthly counts (type=\dQuote{monthly})
     (with \code{family=poisson()}).}
@@ -68,5 +69,9 @@ res = cosinor(stillborn~1, date='dob', data=stillbirth,
               family=binomial(link='cloglog'))
 summary(res)
 plot(res)
+# hourly indoor temperature data
+data(indoor)
+res = cosinor(bedroom~1, date='datetime', type='hourly', data=indoor)
+summary(res)
 }
 }

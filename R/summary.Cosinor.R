@@ -1,7 +1,8 @@
 # summary.Cosinor.R
-# Oct 2011
+# Aug 2014 (added hourly)
 
 summary.Cosinor<-function(object, digits=2, ...){
+  type <- object$call$type 
 ## Checks
   if (class(object)!="Cosinor"){stop("Object must be of class 'Cosinor'")} 
   s = summary(object$glm) # create summary
@@ -29,9 +30,9 @@ summary.Cosinor<-function(object, digits=2, ...){
    amp<-exp(s$coefficients[1,1]+amp)-exp(s$coefficients[1,1])
    addition<-"(absolute scale)"
  }
- phaser<-phasecalc(cosine=s$coefficients[cindex,1],sine=s$coefficients[sindex,1]);
+ phaser = phasecalc(cosine=s$coefficients[cindex,1],sine=s$coefficients[sindex,1]);
 # convert radian phase to a date
- phase<- invyrfraction(frac=phaser/(2*pi),type=object$call$type,text=object$call$text)
+ phase = invyrfraction(frac=phaser/(2*pi),type=object$call$type,text=object$call$text)
 # reverse phase (low)
  lphaser<-phaser+pi;
  if (lphaser<0) { lphaser<-lphaser+(2*pi)} # first put in 0 to 2pi range
@@ -51,6 +52,7 @@ summary.Cosinor<-function(object, digits=2, ...){
  ret$alpha=object$call$alpha
  ret$digits=digits
  ret$text=object$call$text # display phase as text (TRUE/FALSE)
+ ret$type=type
  class(ret) <- "summary.Cosinor"
  ret # uses print.summary.Cosinor
 }
