@@ -1,7 +1,7 @@
 \name{plot.monthglm}
 %%\alias{monthglm}
 \alias{plot.monthglm}
-\title{Plot of monthly estimates}
+\title{Plot of Monthly Estimates}
 \description{Plots the estimated from a generalized linear model with a categorical variable of month.}
 \usage{
 \method{plot}{monthglm}(x, alpha=0.05, ylim=NULL, ...)
@@ -14,11 +14,10 @@
 }
 \seealso{\code{monthglm}}
 \author{Adrian Barnett \email{a.barnett<at>qut.edu.au}}
-\examples{
-\donttest{
+\examples{\donttest{
 data(CVD)
 mmodel = monthglm(formula=cvd~1, data=CVD, family=poisson(),
-                  offsetpop=CVD$pop/100000, offsetmonth=TRUE, refmonth=6)
+                  offsetpop=pop/100000, offsetmonth=TRUE, refmonth=6)
 plot(mmodel)
 }
 }

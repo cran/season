@@ -1,7 +1,7 @@
 # plotCircular.R
 # circular plot
 ## Changes
-## 7/2/10: incorporated titles/axes labekls/colour setting/auto legend
+## 7/2/10: incorporated titles/axes labels/colour setting/auto legend
 
 plotCircular<-function(area1,area2=NULL,spokes=NULL,
                        scale=0.8,labels,stats=TRUE,dp=1,
@@ -11,7 +11,7 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
                        pieces.col=c("white","gray"),
                        length=FALSE,
                        legend=TRUE,
-                       auto.legend=list(x="bottomright",fill=NULL, 
+                       auto.legend=list(x="bottomright",fill=NULL,
                          labels=NULL, title=""), ...){
 
   ## NB: need some serious argumnt checking
@@ -25,7 +25,7 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
       cat("Warning: length of", deparse(substitute(area1)),
           "and", deparse(substitute(area2)),"not equal\n")
   }
-  
+
   ##print(pieces.col)
   density.1 <- density.2 <- 0
   if (pieces.col[1] != "white") density.1 <- NA
@@ -81,9 +81,9 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
         cheese[i+1,2]<-scaled1[cheeseno]*sin((2*pi*i*frac/bins)+start)
       }
       polygon(cheese,density=density.1,angle=0,lty=1,lwd=1,border="black",
-              col=pieces.col[1]) 
+              col=pieces.col[1])
     }
-    
+
     ## plot with two segments #
     ## 1st pattern
     if(is.null(area2)==FALSE){
@@ -106,7 +106,7 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
         cheese1[i+1,2]<-scaled1[cheeseno]*sin((2*pi*i*frac/bins)+start)
       }
       polygon(cheese1,density=density.1,angle=0,lty=1,lwd=1,border="black",
-              col=pieces.col[1]) 
+              col=pieces.col[1])
 
       ## 2nd pattern
       start<-2*pi*((cheeseno-1)/bins)+clockstart
@@ -119,8 +119,8 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
         cheese2[i+1-50,2]<-scaled2[cheeseno]*sin((2*pi*i*frac/bins)+start)
       }
       polygon(cheese2,density=density.2,angle=0,lty=1,lwd=1,border="black",
-              col=pieces.col[2]) 
-    } 
+              col=pieces.col[2])
+    }
   }
   ## add the text
   if (is.null(labels)==FALSE&stats==FALSE){
@@ -155,7 +155,7 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
         sin((2*pi*cheeseno/bins)+start+half)
       spokes[2,1]<-mult*scaleds[cheeseno]*cos((2*pi*cheeseno/bins)+start+half)
       spokes[2,2]<-scaleds[cheeseno]*sin((2*pi*cheeseno/bins)+start+half)
-      lines(spokes,pch=0,type='l',col=spoke.col,lty=1,lwd=1.5) 
+      lines(spokes,pch=0,type='l',col=spoke.col,lty=1,lwd=1.5)
     }
   } # end of spokes
 
@@ -168,7 +168,7 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
       breaks[1,2]<-centrecirc*sin((2*pi*cheeseno/bins)+start)
       breaks[2,1]<-cos((2*pi*cheeseno/bins)+start)
       breaks[2,2]<-sin((2*pi*cheeseno/bins)+start)
-      lines(breaks,pch=0,type='l',lty=3,lwd=1) 
+      lines(breaks,pch=0,type='l',lty=3,lwd=1)
     }
   } # end of lines
 
@@ -179,33 +179,33 @@ plotCircular<-function(area1,area2=NULL,spokes=NULL,
     } else {
       legend.x <- auto.legend$x
     }
-    
+
     ##if (length(auto.legend$title)==0) {
     ##  title <- NULL
     ##} else {
     ##  title <- auto.legend$title
     ##}
-    
+
     if (length(auto.legend$labels)==0){
       labels <- c(deparse(substitute(area1)),
                   deparse(substitute(area2)))
     } else {
       labels <- auto.legend$labels
     }
-    
+
     if (length(auto.legend$fill)==0){
       fill <- pieces.col
     } else {
       fill <- auto.legend$fill
     }
-    
+
     ##print(legend.x)
     ##print(labels)
     ##print(fill)
     ##print(title)
     legend(x=legend.x, legend=labels, title=auto.legend$title, fill=fill, ...)
   }
-  
+
 } # end of function
 
 ## examples
