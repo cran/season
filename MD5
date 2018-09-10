@@ -1,4 +1,4 @@
-9226651bbb18d9bfd4af5cba6711eb66 *DESCRIPTION
+6b089b1dc6448e57eb1234093b01cbf7 *DESCRIPTION
 fafdd66315859913125708c3aa5b508b *NAMESPACE
 45cc68072b7b039b163680d3e01689f4 *R/aaft.R
 479497a0fe032646062920d0f83946b3 *R/casecross.R
@@ -21,7 +21,7 @@ a3c453daccbdf0d350038f23fc2a28fc *R/monthmean.R
 68e77893529ad6307c50088ea6baa875 *R/plot.Monthmean.R
 2a037ef343decd534160dbaaf7e8018b *R/plot.monthglm.R
 794bf15220a545acd0bbe6dea64ac7d0 *R/plot.nonlintest.R
-8e19bc6d7e7f228343987afedea1c7ad *R/plot.nsCosinor.R
+8293164fe8ae4d31fba2613409cff068 *R/plot.nsCosinor.R
 fa1a38ee4cf375bfb1887004ee4d1668 *R/plotCircle.R
 1374511fc7e4b803b862e60222fa0a97 *R/plotCircular.R
 049ac076966aff0f210d2602f22b7ecf *R/plotMonth.R
@@ -53,9 +53,9 @@ f6e814ab783a352867dc3cb9730152e0 *data/indoor.RData
 9cc920b9e9108998c987dcdb4d27da92 *data/schz.RData
 5398d2f2eaaf3470568769da3a8665e3 *data/stillbirth.RData
 e85de0a35489cd7ae02b73a4a8a200aa *inst/CITATION
-858171f11a7824bcbab99e3fdb4baba7 *inst/doc/season-vignette.R
-379041d72869344ad078951752ff4d00 *inst/doc/season-vignette.Rmd
-ca9172e9928e8467f0968055c56f74f1 *inst/doc/season-vignette.html
+7f4d13e7d8671c78e0cd2bcb57fd1c2e *inst/doc/season-vignette.R
+0aada9b60cd787484ab21c1b85810654 *inst/doc/season-vignette.Rmd
+e6678c49d0a70f1771c4b18a5c71f622 *inst/doc/season-vignette.html
 3b49405f22a4793237f9d6496cdf95c5 *man/AFL.Rd
 d671495cdc36e4e296a8053f2a8abdb0 *man/CVD.Rd
 e7ef38397fe4a0285cb27d3b9b96eba6 *man/CVDdaily.Rd
@@ -74,7 +74,7 @@ f6f86b245d87c861f50847016af5f56b *man/exercise.Rd
 b61ac0b8c8bc68627769a8419d4c5f30 *man/monthmean.Rd
 5b05b979cf85791836305d59391087a7 *man/nochars-internal.Rd
 a90d2015ab0f23426f85da6ba8bd6e3a *man/nonlintest.Rd
-def73f5c4827625aa7d97d4b18885398 *man/nscosinor.Rd
+4c5b588f89cac864ac98db7747224782 *man/nscosinor.Rd
 9d7be4ae2c7eacf043c0c9efab34950d *man/nscosinor.initial-internal.Rd
 43c4721046b503c50d7d6b26d922298c *man/peri.Rd
 0eb7e705f7f434726901921861237a47 *man/phasecalc.Rd
@@ -105,4 +105,4 @@ d4a28733a597fe3cd3202f90cbb7d98d *man/summary.nsCosinor.Rd
 31ca310928cbd8dfdf3ac90e77390a2e *man/third.Rd
 0ce7cb5ec533d4577faa409da30016d4 *man/wtest.Rd
 12de662ccdb967edab5dec8741775e6c *man/yrfraction.Rd
-379041d72869344ad078951752ff4d00 *vignettes/season-vignette.Rmd
+0aada9b60cd787484ab21c1b85810654 *vignettes/season-vignette.Rmd

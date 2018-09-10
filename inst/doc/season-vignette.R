@@ -21,7 +21,7 @@ ggplot(CVDdaily, aes(x=factor(month), y=cvd))+
 years = 1987:2001
 Januarys = as.numeric(as.Date(paste(years, '-01-01', sep=''), origin='1970-01-01'))
 ggplot(CVDdaily, aes(x=as.numeric(date), y=cvd))+
- geom_point()+
+ geom_line()+
  scale_x_continuous(breaks=Januarys, labels=years)+
  ylab('Daily number of CVD deaths')+
  xlab('Time')+
@@ -38,8 +38,8 @@ ggplot(CVDdaily, aes(x=tmpd, y=cvd))+
 ## ---- warning=FALSE, message=FALSE---------------------------------------
 # make a spline basis that has a lag and is non-linear
 tmpd.basis = crossbasis(CVDdaily$tmpd, lag=14, # 14 day lag
-                         arglag=list(fun='ns', df=3), # 3 degrees of freedom for lag
-                         argvar=list(fun='ns', knots=c(60, 75))) # knots at 65 and 75 degrees
+                arglag=list(fun='ns', df=3), # 3 degrees of freedom for lag; ns = natural spline
+                argvar=list(fun='ns', knots=c(60, 75))) # knots at 65 and 75 degrees
 # add the spline basis variables to the data
 CVDdaily = cbind(CVDdaily, tmpd.basis[1:nrow(CVDdaily), ])
 # create the regression formula
@@ -67,7 +67,7 @@ to.plot = data.frame(temperature = for.plot$predvar,
                      lower = for.plot$allRRlow,
                      upper = for.plot$allRRhigh)
 ggplot(data=to.plot, aes(x=temperature, y=mean, ymin=lower, ymax=upper))+
-  geom_hline(lty=2, yintercept = 1)+ # reference line at no change in odds
+  geom_hline(lty=2, yintercept = 1)+ # horizontal reference line at no change in odds
   geom_ribbon(alpha=0.3)+
   geom_line()+
   xlab('Temperature (degrees F)')+
@@ -78,15 +78,16 @@ ggplot(data=to.plot, aes(x=temperature, y=mean, ymin=lower, ymax=upper))+
 set.seed(1234) # set the random seed to give repeatable results
 data(CVD)
 f = c(12) # a single twelve month cycle
-tau = c(180, 50) # achieved via trial-and-error
+tau = c(10, 50) # achieved via trial-and-error; small tau -> less variability
 ns.season = nscosinor(data=CVD, response='adj', cycles=f, niters=2000,
          burnin=500, tau=tau, div=1000)
 summary(ns.season)
+plot(ns.season)
 
 ## ------------------------------------------------------------------------
-cat('Mean phase = ', round(invyrfraction(0.6887892/(2*pi), type='monthly', text=F), 2), ' months.\n', sep='')
-cat('Lower 95% interval = ', round(invyrfraction(0.5708593/(2*pi), type='monthly', text=F), 2), ' months.\n', sep='')
-cat('Upper 95% interval = ', round(invyrfraction(0.8062694/(2*pi), type='monthly', text=F), 2), ' months.\n', sep='')
+cat('Mean phase = ', round(invyrfraction(0.6952055/(2*pi), type='monthly', text=F), 2), ' months.\n', sep='')
+cat('Lower 95% interval = ', round(invyrfraction(0.5732958/(2*pi), type='monthly', text=F), 2), ' months.\n', sep='')
+cat('Upper 95% interval = ', round(invyrfraction(0.8216251/(2*pi), type='monthly', text=F), 2), ' months.\n', sep='')
 
 ## ------------------------------------------------------------------------
 set.seed(1234) # set the random seed to give repeatable results
