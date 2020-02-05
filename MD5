@@ -1,7 +1,7 @@
-6b089b1dc6448e57eb1234093b01cbf7 *DESCRIPTION
+badcd6f381eb5ff0ffce597ee485141d *DESCRIPTION
 fafdd66315859913125708c3aa5b508b *NAMESPACE
 45cc68072b7b039b163680d3e01689f4 *R/aaft.R
-479497a0fe032646062920d0f83946b3 *R/casecross.R
+850305110ed56f964da9d060791d1117 *R/casecross.R
 77896e0004a22944432588a0ce6c1bd8 *R/ciPhase.R
 d53dda8b887c0688cc7116b08b49960c *R/cipolygon.R
 ae426c140323cf851502fbff3894d26e *R/cosinor.R
@@ -13,7 +13,7 @@ d56355e8b7b4daa016758f345d095178 *R/kalfil.R
 a3c453daccbdf0d350038f23fc2a28fc *R/monthmean.R
 1a4f77a2f4f2dba50a1ec5e8e1f443aa *R/nochars.R
 6670f579c2480f1b912c15904aee9963 *R/nonlintest.R
-9b999940434e46f83205c45519f8ceec *R/nscosinor.R
+38b7086b904fe2c78ee964e79d90e54d *R/nscosinor.R
 372388fe95f6eaf17730d23af196b052 *R/nscosinor.initial.R
 4de307de52d2fceb286c91fb307edbe9 *R/peri.R
 98cca90a3c8982d9b28f67e80214a7ea *R/phasecalc.R
@@ -23,7 +23,7 @@ a3c453daccbdf0d350038f23fc2a28fc *R/monthmean.R
 794bf15220a545acd0bbe6dea64ac7d0 *R/plot.nonlintest.R
 8293164fe8ae4d31fba2613409cff068 *R/plot.nsCosinor.R
 fa1a38ee4cf375bfb1887004ee4d1668 *R/plotCircle.R
-1374511fc7e4b803b862e60222fa0a97 *R/plotCircular.R
+8dd635a89618909bfee71d44ddf032c0 *R/plotCircular.R
 049ac076966aff0f210d2602f22b7ecf *R/plotMonth.R
 942c1c451247694f7bbda7c0d7807ff9 *R/print.Cosinor.R
 0a4e2948ece125fa2448b881cb605234 *R/print.Monthmean.R
@@ -44,7 +44,8 @@ bce535542adeb61744d9481f1c7553f5 *R/print.summary.Cosinor.R
 7606b8d00d97850355d57588a464bdbc *R/third.R
 eecd91805525e6a657bd30055cdc99ca *R/wtest.R
 d99944b7dbf9d75575fefb7eae316850 *R/yrfraction.R
-5c5a269e13057eea94ded600be07eb5a *build/vignette.rds
+657240282d9e8db1455a054da2bc8ba0 *README.md
+61a4845c9de8ff2a35bc2951d8032e3a *build/vignette.rds
 8955af163060f4151e469a58dd87a363 *data/AFL.RData
 4dd9b661a92cc62ddcb9e8d14e7326a7 *data/CVD.RData
 35a2776587cdd0639055881983d93f0f *data/CVDdaily.RData
@@ -53,9 +54,9 @@ f6e814ab783a352867dc3cb9730152e0 *data/indoor.RData
 9cc920b9e9108998c987dcdb4d27da92 *data/schz.RData
 5398d2f2eaaf3470568769da3a8665e3 *data/stillbirth.RData
 e85de0a35489cd7ae02b73a4a8a200aa *inst/CITATION
-7f4d13e7d8671c78e0cd2bcb57fd1c2e *inst/doc/season-vignette.R
+c7b3691fecae067cd2a1075d9998f2d0 *inst/doc/season-vignette.R
 0aada9b60cd787484ab21c1b85810654 *inst/doc/season-vignette.Rmd
-e6678c49d0a70f1771c4b18a5c71f622 *inst/doc/season-vignette.html
+8d6eb4f179b60d2e021b0b7b47cb8576 *inst/doc/season-vignette.html
 3b49405f22a4793237f9d6496cdf95c5 *man/AFL.Rd
 d671495cdc36e4e296a8053f2a8abdb0 *man/CVD.Rd
 e7ef38397fe4a0285cb27d3b9b96eba6 *man/CVDdaily.Rd
@@ -74,7 +75,7 @@ f6f86b245d87c861f50847016af5f56b *man/exercise.Rd
 b61ac0b8c8bc68627769a8419d4c5f30 *man/monthmean.Rd
 5b05b979cf85791836305d59391087a7 *man/nochars-internal.Rd
 a90d2015ab0f23426f85da6ba8bd6e3a *man/nonlintest.Rd
-4c5b588f89cac864ac98db7747224782 *man/nscosinor.Rd
+d30a047618ee33e30a59a16317cdecc8 *man/nscosinor.Rd
 9d7be4ae2c7eacf043c0c9efab34950d *man/nscosinor.initial-internal.Rd
 43c4721046b503c50d7d6b26d922298c *man/peri.Rd
 0eb7e705f7f434726901921861237a47 *man/phasecalc.Rd

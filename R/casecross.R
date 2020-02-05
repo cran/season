@@ -1,6 +1,6 @@
 ## casecross.R
 ## time-stratified case-crossover
-## Aug 2018
+## Oct 2011
 ## assumes date variable is called 'date'
 ## quicker version
 
