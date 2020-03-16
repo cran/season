@@ -1,4 +1,4 @@
-badcd6f381eb5ff0ffce597ee485141d *DESCRIPTION
+864e7d14a2f4bbe9f68fe35e922bae0f *DESCRIPTION
 fafdd66315859913125708c3aa5b508b *NAMESPACE
 45cc68072b7b039b163680d3e01689f4 *R/aaft.R
 850305110ed56f964da9d060791d1117 *R/casecross.R
@@ -31,13 +31,13 @@ fa1a38ee4cf375bfb1887004ee4d1668 *R/plotCircle.R
 65a5e687e0ef729819be740d807990f7 *R/print.monthglm.R
 f230a1e5298cf76c63051b382259fc77 *R/print.nonlintest.R
 f194a214c47809d37ff479cb513df948 *R/print.nsCosinor.R
-bce535542adeb61744d9481f1c7553f5 *R/print.summary.Cosinor.R
+7ccd288b78d7348b07672e694200aa03 *R/print.summary.Cosinor.R
 6e838f3a99675351659b64252b5d275b *R/print.summary.monthglm.R
 9910d15beead6ed73c7d7a0fb5b8804e *R/print.summary.nsCosinor.R
 39a8c654147a7c381f06d3a0d2892676 *R/rinvgamma.R
 462149f4a2a5a33b419d0a6657edd680 *R/seasrescheck.R
 2759353a9d42c51734ce97afc3de422e *R/sinusoid.R
-52266d33027ff3973aab879c0d045458 *R/summary.Cosinor.R
+f0b37851deaed7e91b7c23677ab8b5b7 *R/summary.Cosinor.R
 0fbca0e33cedd31bab65565c760d2a1a *R/summary.casecross.R
 21c9df3e092959c997bca7d5812746ea *R/summary.monthglm.R
 30b0dbd870d3785b326d8ee5a97e0d0a *R/summary.nsCosinor.R
@@ -56,7 +56,7 @@ f6e814ab783a352867dc3cb9730152e0 *data/indoor.RData
 e85de0a35489cd7ae02b73a4a8a200aa *inst/CITATION
 c7b3691fecae067cd2a1075d9998f2d0 *inst/doc/season-vignette.R
 0aada9b60cd787484ab21c1b85810654 *inst/doc/season-vignette.Rmd
-8d6eb4f179b60d2e021b0b7b47cb8576 *inst/doc/season-vignette.html
+4e993f9c311418915dec7e51546304a1 *inst/doc/season-vignette.html
 3b49405f22a4793237f9d6496cdf95c5 *man/AFL.Rd
 d671495cdc36e4e296a8053f2a8abdb0 *man/CVD.Rd
 e7ef38397fe4a0285cb27d3b9b96eba6 *man/CVDdaily.Rd
@@ -64,7 +64,7 @@ e7ef38397fe4a0285cb27d3b9b96eba6 *man/CVDdaily.Rd
 f4b6cd14235fd5173448fb9bce4510b8 *man/casecross.Rd
 914cfab09da52556f9ac641cf7175995 *man/ciPhase.Rd
 49ceb01251d8c5de1716094d88b255b5 *man/cipolygon-internal.Rd
-4b9f932cb24f9e217647b64734d1b873 *man/cosinor.Rd
+83a51856b89ac47d13332857223c2ed5 *man/cosinor.Rd
 9a17fe1177eab8a4807f96eab50e5976 *man/createAdj.Rd
 f6f86b245d87c861f50847016af5f56b *man/exercise.Rd
 31a7acb15be4438fac1f15e49352799e *man/flagleap-internal.Rd
@@ -95,11 +95,11 @@ bf1052c67f5a7c36b2ae371304ef59e5 *man/print.Cosinor.Rd
 7f403556a6a6c0d0a029cf85cb1b9fad *man/rinvgamma-internal.Rd
 7b692dc8a2458cf638e759226e193ceb *man/schz.Rd
 1972c5cab9258795aef8ae0ee352d2c3 *man/season-internal.Rd
-784fb507f620503656f974b51d035300 *man/season-package.Rd
+7a16f45bd3808302b6ff550151333137 *man/season-package.Rd
 e453bd2ca18512d54702fa24071a066e *man/seasrescheck.Rd
 683d8004f932d02d228a39ec4997fdda *man/sinusoid.Rd
 c39cb719d9cfd298159326a240533470 *man/stillbirth.Rd
-524cc2d8819c872e38ffee5aa76fe668 *man/summary.Cosinor.Rd
+f88899db8d054a8d87ab89893828c678 *man/summary.Cosinor.Rd
 cfd2ccdaaa5ce9cd8cb4e8eb36c6923b *man/summary.casecross.Rd
 c65c5b269692475f2b479909a724e642 *man/summary.monthglm.Rd
 d4a28733a597fe3cd3202f90cbb7d98d *man/summary.nsCosinor.Rd
