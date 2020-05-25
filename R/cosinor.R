@@ -9,6 +9,7 @@
 cosinor<-function(formula, date, data,family=gaussian(), alpha=0.05,
                   cycles=1, rescheck=FALSE, type='daily', offsetmonth=FALSE,
                   offsetpop=NULL,text=TRUE){
+  alpha= eval(alpha)
   ## checks
   classes = lapply(data, class) # classes of all variables
   this.class=as.character(classes[which(names(data)==date)]) # also used later

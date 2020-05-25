@@ -40,7 +40,8 @@ summary.Cosinor = function(object, digits = 2, ...){
  lphase = invyrfraction(frac = lphaser/(2*pi),type = object$call$type,text = object$call$text)
 # statistical signficance
  toreport = rbind(s$coefficients[cindex,],s$coefficients[sindex,])
- significant = as.logical(sum(toreport[,4]<(object$call$alpha/2)))
+ adjusted = eval(object$call$alpha)/2
+ significant = as.logical(sum(toreport[,4]<adjusted))
 # returns
  ret = list()
  ret$n = length(object$residuals)

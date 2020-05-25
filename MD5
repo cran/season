@@ -1,10 +1,10 @@
-864e7d14a2f4bbe9f68fe35e922bae0f *DESCRIPTION
+4870bc079aba9696bc4b95d3cb93be93 *DESCRIPTION
 fafdd66315859913125708c3aa5b508b *NAMESPACE
 45cc68072b7b039b163680d3e01689f4 *R/aaft.R
 850305110ed56f964da9d060791d1117 *R/casecross.R
 77896e0004a22944432588a0ce6c1bd8 *R/ciPhase.R
 d53dda8b887c0688cc7116b08b49960c *R/cipolygon.R
-ae426c140323cf851502fbff3894d26e *R/cosinor.R
+3ff2be0d8a8ffd49f9cd9e6f6c77bbc5 *R/cosinor.R
 068f413ef87d8c4a0050ec4cbdbcf90c *R/createAdj.R
 cec8ad0d91d79b35c13d4406c507f1e9 *R/flagleap.R
 7374033a80c38b431987cefe8efc31fa *R/invyrfraction.R
@@ -31,13 +31,13 @@ fa1a38ee4cf375bfb1887004ee4d1668 *R/plotCircle.R
 65a5e687e0ef729819be740d807990f7 *R/print.monthglm.R
 f230a1e5298cf76c63051b382259fc77 *R/print.nonlintest.R
 f194a214c47809d37ff479cb513df948 *R/print.nsCosinor.R
-7ccd288b78d7348b07672e694200aa03 *R/print.summary.Cosinor.R
+f15d978961005b6971927b77d7c834bc *R/print.summary.Cosinor.R
 6e838f3a99675351659b64252b5d275b *R/print.summary.monthglm.R
 9910d15beead6ed73c7d7a0fb5b8804e *R/print.summary.nsCosinor.R
 39a8c654147a7c381f06d3a0d2892676 *R/rinvgamma.R
 462149f4a2a5a33b419d0a6657edd680 *R/seasrescheck.R
 2759353a9d42c51734ce97afc3de422e *R/sinusoid.R
-f0b37851deaed7e91b7c23677ab8b5b7 *R/summary.Cosinor.R
+55eb0f9705a8930150e3b10bf7d9648f *R/summary.Cosinor.R
 0fbca0e33cedd31bab65565c760d2a1a *R/summary.casecross.R
 21c9df3e092959c997bca7d5812746ea *R/summary.monthglm.R
 30b0dbd870d3785b326d8ee5a97e0d0a *R/summary.nsCosinor.R
@@ -45,7 +45,7 @@ f0b37851deaed7e91b7c23677ab8b5b7 *R/summary.Cosinor.R
 eecd91805525e6a657bd30055cdc99ca *R/wtest.R
 d99944b7dbf9d75575fefb7eae316850 *R/yrfraction.R
 657240282d9e8db1455a054da2bc8ba0 *README.md
-61a4845c9de8ff2a35bc2951d8032e3a *build/vignette.rds
+125349889cf3d1fc145b0bd27c49f10e *build/vignette.rds
 8955af163060f4151e469a58dd87a363 *data/AFL.RData
 4dd9b661a92cc62ddcb9e8d14e7326a7 *data/CVD.RData
 35a2776587cdd0639055881983d93f0f *data/CVDdaily.RData
@@ -56,7 +56,7 @@ f6e814ab783a352867dc3cb9730152e0 *data/indoor.RData
 e85de0a35489cd7ae02b73a4a8a200aa *inst/CITATION
 c7b3691fecae067cd2a1075d9998f2d0 *inst/doc/season-vignette.R
 0aada9b60cd787484ab21c1b85810654 *inst/doc/season-vignette.Rmd
-4e993f9c311418915dec7e51546304a1 *inst/doc/season-vignette.html
+8c75cba27a9c5b71fa9cfb47c083dd3f *inst/doc/season-vignette.html
 3b49405f22a4793237f9d6496cdf95c5 *man/AFL.Rd
 d671495cdc36e4e296a8053f2a8abdb0 *man/CVD.Rd
 e7ef38397fe4a0285cb27d3b9b96eba6 *man/CVDdaily.Rd
