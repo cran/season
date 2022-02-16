@@ -1,8 +1,8 @@
 Package: season
 Type: Package
 Title: Seasonal Analysis of Health Data
-Version: 0.3.13
-Author: Adrian Barnett and Peter Baker
+Version: 0.3.14
+Author: Adrian Barnett and Peter Baker and Oliver Hughes
 Maintainer: Adrian Barnett <a.barnett@qut.edu.au>
 Depends: R (>= 3.0.1), ggplot2 (>= 0.9.3), MASS, survival
 Description: Routines for the seasonal analysis of health data,
@@ -12,9 +12,11 @@ Description: Routines for the seasonal analysis of health data,
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-Suggests: knitr, rmarkdown, mgcv, dlnm, coda
+Suggests: knitr, rmarkdown, mgcv, dlnm, coda, testthat (>= 3.0.0)
 VignetteBuilder: knitr
+RoxygenNote: 7.1.2
+Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2021-06-03 03:20:09 UTC; barnetta
+Packaged: 2022-02-16 21:57:29 UTC; barnetta
 Repository: CRAN
-Date/Publication: 2021-06-03 10:50:02 UTC
+Date/Publication: 2022-02-16 22:50:02 UTC
