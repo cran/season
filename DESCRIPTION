@@ -1,14 +1,11 @@
 Package: season
 Type: Package
 Title: Seasonal Analysis of Health Data
-Version: 0.3.14
+Version: 0.3.15
 Author: Adrian Barnett and Peter Baker and Oliver Hughes
 Maintainer: Adrian Barnett <a.barnett@qut.edu.au>
 Depends: R (>= 3.0.1), ggplot2 (>= 0.9.3), MASS, survival
-Description: Routines for the seasonal analysis of health data,
-    including regression models, time-stratified case-crossover,
-    plotting functions and residual checks, see Barnett and Dobson (2010) ISBN 978-3-642-10748-1. Thanks to Yuming Guo
-    for checking the case-crossover code. 
+Description: Routines for the seasonal analysis of health data, including regression models, time-stratified case-crossover, plotting functions and residual checks, see Barnett and Dobson (2010) ISBN 978-3-642-10748-1. Thanks to Yuming Guo for checking the case-crossover code. 
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -17,6 +14,6 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-02-16 21:57:29 UTC; barnetta
+Packaged: 2022-03-20 06:54:30 UTC; barnetta
 Repository: CRAN
-Date/Publication: 2022-02-16 22:50:02 UTC
+Date/Publication: 2022-03-21 08:30:11 UTC
