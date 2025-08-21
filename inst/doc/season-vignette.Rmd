@@ -72,7 +72,7 @@ ggplot(CVDdaily, aes(x=tmpd, y=cvd))+
 
 We now examine the association between temperature and death using a case-crossover model. This model compares the number of deaths on case and control days, and only uses controls that are near the case day. By choosing control days near case days, the model controls for long-term trends and seasonal patterns. Below we use the default of cases and controls selected from the same 28 day (4 week) windows. The model is fitted using conditional logistic regression. The technical details are in our book [Analysing Seasonal Health Data](https://link.springer.com/book/10.1007/978-3-642-10748-1).
 
-To model a non-linear effect for temperature, we first create a spline for temperture with knots at 60 and 75 degrees Fahrenheit, which essentially means we expect a change in the association around these temperatures. 
+To model a non-linear effect for temperature, we first create a spline for temperature with knots at 60 and 75 degrees Fahrenheit, which essentially means we expect a change in the association around these temperatures. 
 
 Deaths due to temperature can occur days after exposure. For example, when a person has a heart attack on a hot day, is admitted to hospital alive, but dies in hospital some days later. To account for this we include a lag of 14 days. By using a lagged temperature we lose a few observations at the start of the data, because we do not have temperature data from the year 1986. We use the `[dlnm](https://cran.r-project.org/web/packages/dlnm/index.html)` library to create the non-linear and lagged spline basis. 
 
@@ -144,7 +144,27 @@ ggplot(data=to.plot, aes(x=temperature, y=mean, ymin=lower, ymax=upper))+
   theme_bw()
 ```
 
-The plot shows a U-shaped risk, with increased odds at low and high temperatures relative to the reference temperature of 70 degrees.
+### Plot of the lagged temperature and death association for a specific temperature 
+
+We can also take a "slice" of the 3D plot to show the association on each lagged day.
+The plot shows the mean odds (solid line) and 95% confidence interval (shaded area).
+
+```{r, fig.width=5}
+for.plot = crosspred(basis=tmpd.basis, coef=coef, vcov=vcov, at=80, lag=c(0,14), model.link = 'log', cen=70)
+to.plot = data.frame(lag = for.plot$lag[1]:for.plot$lag[2],
+                     mean = as.numeric(for.plot$matRRfit),
+                     lower = as.numeric(for.plot$matRRlow),
+                     upper = as.numeric(for.plot$matRRhigh))
+ggplot(data=to.plot, aes(x=lag, y=mean, ymin=lower, ymax=upper))+
+  geom_hline(lty=2, yintercept = 1)+ # horizontal reference line at no change in odds
+  geom_ribbon(alpha=0.3)+
+  geom_line()+
+  xlab('Lag (days)')+
+  ylab('Odds ratio')+
+  theme_bw()
+```
+
+The plot shows that the estimated risk is highest on the day of exposure and generally declines with increasing lag.
 
 ## Non-stationary seasonal patterns
 

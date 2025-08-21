@@ -9,7 +9,7 @@
 #' Tests for a seasonal pattern in Binomial data.
 #' 
 #' A test of whether monthly data has a sinusoidal seasonal pattern. The test
-#' has low power compared with the \code{\link{cosinor}} test.
+#' has low power compared with the \code{\link[season:cosinor]{cosinor}} test.
 #' 
 #' @param cases variable name for cases (\dQuote{successes}).
 #' @param offset variable name for at-risk population (\dQuote{trials}).

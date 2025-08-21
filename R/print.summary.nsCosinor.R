@@ -9,7 +9,7 @@
 #' @export
 print.summary.nscosinor <- function(x, ...){
 
-  if (class(x)!="summary.nsCosinor"){
+  if (is(x,"summary.nsCosinor")==FALSE){
     stop("Object must be of class 'summary.nsCosinor'")
   } 
 

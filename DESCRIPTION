@@ -1,19 +1,36 @@
-Package: season
 Type: Package
+Package: season
 Title: Seasonal Analysis of Health Data
-Version: 0.3.15
-Author: Adrian Barnett and Peter Baker and Oliver Hughes
-Maintainer: Adrian Barnett <a.barnett@qut.edu.au>
-Depends: R (>= 3.0.1), ggplot2 (>= 0.9.3), MASS, survival
-Description: Routines for the seasonal analysis of health data, including regression models, time-stratified case-crossover, plotting functions and residual checks, see Barnett and Dobson (2010) ISBN 978-3-642-10748-1. Thanks to Yuming Guo for checking the case-crossover code. 
+Version: 0.3.16
+Authors@R: c(
+    person("Adrian", "Barnett", , "a.barnett@qut.edu.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-6339-0374")),
+    person("Peter", "Baker", role = "aut",
+           comment = c(ORCID = "0000-0002-1241-7263")),
+    person("Oliver", "Hughes", role = "aut")
+  )
+Description: Routines for the seasonal analysis of health data, including
+    regression models, time-stratified case-crossover, plotting functions
+    and residual checks, see Barnett and Dobson (2010) ISBN
+    978-3-642-10748-1. Thanks to Yuming Guo for checking the
+    case-crossover code.
 License: GPL (>= 3)
+URL: https://github.com/agbarnett/season
+BugReports: https://github.com/agbarnett/season/issues
+Depends: ggplot2 (>= 0.9.3), MASS, R (>= 3.0.1), survival
+Imports: coda, graphics, grDevices, methods, stats, stringr
+Suggests: dlnm, knitr, rmarkdown, testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
-Suggests: knitr, rmarkdown, mgcv, dlnm, coda, testthat (>= 3.0.0)
-VignetteBuilder: knitr
-RoxygenNote: 7.1.2
-Config/testthat/edition: 3
+RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2022-03-20 06:54:30 UTC; barnetta
+Packaged: 2025-08-21 05:28:47 UTC; barnetta
+Author: Adrian Barnett [aut, cre] (ORCID:
+    <https://orcid.org/0000-0001-6339-0374>),
+  Peter Baker [aut] (ORCID: <https://orcid.org/0000-0002-1241-7263>),
+  Oliver Hughes [aut]
+Maintainer: Adrian Barnett <a.barnett@qut.edu.au>
 Repository: CRAN
-Date/Publication: 2022-03-21 08:30:11 UTC
+Date/Publication: 2025-08-21 07:50:02 UTC

@@ -11,10 +11,10 @@
 #' 
 #' Month is fitted as a categorical variable as part of a generalized linear
 #' model. Other independent variables can be added to the right-hand side of
-#' \code{formula}.
+#' \code{\link[stats:formula]{formula}}.
 #' 
 #' This model is useful for examining non-sinusoidal seasonal patterns. For
-#' sinusoidal seasonal patterns see \code{\link{cosinor}}.
+#' sinusoidal seasonal patterns see \code{\link[season:cosinor]{cosinor}}.
 #' 
 #' The data frame should contain the integer months and the year as a 4 digit
 #' number. These are used to calculate the number of days in each month
@@ -24,7 +24,7 @@
 #' month to the regression equation, it will be added automatically).
 #' @param data a data frame.
 #' @param family a description of the error distribution and link function to
-#' be used in the model (default=\code{gaussian()}). (See \code{\link{family}}
+#' be used in the model (default=\code{gaussian()}). (See \code{\link[stats:family]{family}}
 #' for details of family functions.).
 #' @param refmonth reference month, must be between 1 and 12 (default=1 for
 #' January).
@@ -52,15 +52,15 @@
 #' summary(mmodel)
 #' 
 #' @export monthglm
-monthglm<-function(formula,data,family=gaussian(),refmonth=1,
+monthglm = function(formula,data,family=gaussian(),refmonth=1,
                    monthvar='month',offsetmonth=FALSE,offsetpop=NULL){
   ## checks
   if (refmonth<1|refmonth>12){stop("Reference month must be between 1 and 12")}
   ## original call with defaults (see amer package)
-  ans <- as.list(match.call())
-  frmls <- formals(deparse(ans[[1]]))
-  add <- which(!(names(frmls) %in% names(ans)))
-  call<-as.call(c(ans, frmls[add]))
+  ans  =  as.list(match.call())
+  frmls  =  formals(deparse(ans[[1]]))
+  add  =  which(!(names(frmls) %in% names(ans)))
+  call = as.call(c(ans, frmls[add]))
 
   monthvar=with(data,get(monthvar))
   cmonthvar=class(monthvar)
@@ -73,33 +73,33 @@ monthglm<-function(formula,data,family=gaussian(),refmonth=1,
      months=as.numeric(monthvar)
      data$month=months # add to data for flagleap
      months=as.factor(months)
-     levels(months)[months]<-month.abb[months]
-     months<-relevel(months.u,ref=month.abb[refmonth]) # set reference month
+     levels(months)[months] = month.abb[months]
+     months = relevel(months.u,ref=month.abb[refmonth]) # set reference month
   }
   ## Transform month numbers to names
   if(cmonthvar%in%c('integer','numeric')){
-    months.u<-as.factor(monthvar)  
-    nums<-as.numeric(nochars(levels(months.u))) # Month numbers
-    levels(months.u)[nums]<-month.abb[nums]
-    months<-relevel(months.u,ref=month.abb[refmonth]) # set reference month
+    months.u = as.factor(monthvar)  
+    nums = as.numeric(stringr::str_remove_all(levels(months.u), pattern='[^0-9]')) # Month numbers; replaced `nochars`
+    levels(months.u)[nums] = month.abb[nums]
+    months = relevel(months.u,ref=month.abb[refmonth]) # set reference month
   }
   ## prepare data/formula
-  parts<-paste(formula)
-  f<-as.formula(paste(parts[2],parts[1],parts[3:length(formula)],'+months'))
-  dep<-parts[2] # dependent variable
-  days<-flagleap(data=data,report=FALSE,matchin=T) # get the number of days in each month
-  l<-nrow(data)
+  parts = paste(formula)
+  f = as.formula(paste(parts[2],parts[1],parts[3:length(formula)],'+months'))
+  dep = parts[2] # dependent variable
+  days = flagleap(data=data,report=FALSE,matchin=T) # get the number of days in each month
+  l = nrow(data)
   if(is.null(offsetpop)==FALSE){poff=with(data,eval(offsetpop))} else{poff=rep(1,l)} # 
   if(offsetmonth==TRUE){moff=days$ndaysmonth/(365.25/12)} else{moff=rep(1,l)} # days per month divided by average month length
-###  data$off<-log(poff*moff)
-  off<-log(poff*moff)  # 
-  fit<-glm(formula=f,data=data,family=family,offset=off)
+###  data$off = log(poff*moff)
+  off = log(poff*moff)  # 
+  fit = glm(formula=f,data=data,family=family,offset=off)
   ## return
-  toret<-list()
-  toret$call<-call
-  toret$glm<-fit
-  toret$fitted.values<-fitted(fit)
-  toret$residuals<-residuals(fit)
-  class(toret)<-'monthglm'
+  toret = list()
+  toret$call = call
+  toret$glm = fit
+  toret$fitted.values = fitted(fit)
+  toret$residuals = residuals(fit)
+  class(toret) = 'monthglm'
   return(toret)
 }

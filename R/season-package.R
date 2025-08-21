@@ -8,9 +8,9 @@
 #' (equally spaced in time) and survey data (unequally spaced in time).
 #' 
 #' Sinusoidal (parametric) seasonal patterns are available
-#' (\code{\link{cosinor}}, \code{\link{nscosinor}}), as well as models for
-#' monthly data (\code{\link{monthglm}}), and the case-crossover method to
-#' control for seasonality (\code{\link{casecross}}).
+#' (\code{\link[season:cosinor]{cosinor}}, \code{\link[season:nscosinor]{nscosinor}}), as well as models for
+#' monthly data (\code{\link[season:monthglm]{monthglm}}), and the case-crossover method to
+#' control for seasonality (\code{\link[season:casecross]{casecross}}).
 #' 
 #' \code{season} aims to fill an important gap in the software by providing a
 #' range of tools for analysing seasonal data. The examples are based on health
@@ -19,10 +19,12 @@
 #' 
 #' @name season-package
 #' @aliases season-package season
-#' @docType package
+#' _PACKAGE
+#' _LANGUAGE en-UK
 #' @importFrom grDevices gray
 #' @importFrom graphics axis box hist lines par plot points polygon rug text
 #' @importFrom stats acf as.formula cpgram fft fitted gaussian glm median model.frame na.omit pchisq qchisq qnorm quantile relevel resid residuals rgamma rnorm runif sd time acf as.formula cpgram fft fitted gaussian glm median model.frame na.omit pchisq qchisq qnorm quantile relevel resid residuals rgamma rnorm runif sd time
+#' @importFrom methods is
 #' @import MASS
 #' @import ggplot2 
 #' @import survival
@@ -195,21 +197,6 @@ NULL
 NULL
 
 
-#' Remove Letters and Characters from a String
-#' 
-#' Remove letters and characters from a string to leave only numbers. Removes
-#' all letters (upper and lower case) and the characters \dQuote{.}, \dQuote{(}
-#' and \dQuote{)}. For internal use only.
-#' 
-#' 
-#' @name nochars
-#' @param text text string.
-#' @author Adrian Barnett \email{a.barnett@@qut.edu.au}
-NULL
-
-
-
-
 
 #' Initial Values for Non-stationary Cosinor
 #' 
@@ -227,7 +214,7 @@ NULL
 #' @param lambda distance between observations (lambda=1/12 for monthly data,
 #' default).
 #' @param n.season number of seasons.
-#' @author Adrian Barnett \email{a.barnett@@qut.edu.au}
+#' @author Adrian Barnett \email{a.barnett@qut.edu.au}
 NULL
 
 

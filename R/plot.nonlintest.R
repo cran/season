@@ -19,7 +19,7 @@ plot.nonlintest<-function(x, plot=TRUE, ...){
   z <- NULL # Setting some variables to NULL first (for R CMD check)
 
   ## Check
-  if (class(x) != "nonlintest"){
+  if (is(x,"nonlintest")==FALSE){
     stop("Object must be of class 'nonlintest'")
   }
 

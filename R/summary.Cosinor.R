@@ -22,7 +22,7 @@
 #' @param \dots further arguments passed to or from other methods.
 #' @return \item{n}{sample size.} \item{amp}{estimated amplitude.}
 #' \item{amp.scale}{the scale of the estimated amplitude (empty for standard
-#' regression; \sQuote{probability scale} for logistic regession;
+#' regression; \sQuote{probability scale} for logistic regression;
 #' \sQuote{absolute scale} for Poisson regression).} \item{phase}{estimated
 #' peak phase on a time scale.} \item{lphase}{estimated low phase on a time
 #' scale (half a year after/before \code{phase}).}
@@ -34,11 +34,11 @@
 #' coefficients.}
 #' @author Adrian Barnett \email{a.barnett@qut.edu.au}
 #' @seealso \code{cosinor}, \code{plot.Cosinor}, \code{invyrfraction}
-#' @export
+#' @noRd 
 summary.Cosinor = function(object, digits = 2, ...){
  type = object$call$type 
 ## Checks
- if (class(object)!= "Cosinor"){stop("Object must be of class 'Cosinor'")} 
+ if (is(object, "Cosinor")==FALSE){stop("Object must be of class 'Cosinor'")} 
  s = summary(object$glm) # create summary
  cnames = row.names(s$coefficients)
  cindex = sum(as.numeric(cnames == 'cosw')*(1:length(cnames)))

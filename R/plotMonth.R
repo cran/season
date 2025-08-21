@@ -25,7 +25,7 @@
 #' plotMonth(data=CVD, resp='cvd', panels=12)
 #' }
 #' 
-#' @export 
+#' @noRd 
 plotMonth<-function(data,resp,panels=12, ...){
 
   year <- yaxis <- Month <- NULL # Setting some variables to NULL first (for R CMD check)

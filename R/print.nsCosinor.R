@@ -19,7 +19,7 @@
 print.nsCosinor<-function(x, ...){
 
   ## Checks
-  if (class(x)!="nsCosinor"){
+  if (is(x,"nsCosinor")==FALSE){
     stop("Object must be of class 'nsCosinor'")} 
 
   ## Statistics ###

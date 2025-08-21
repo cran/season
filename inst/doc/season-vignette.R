@@ -17,7 +17,7 @@ ggplot(CVDdaily, aes(x=factor(month), y=cvd))+
  xlab('Month')+
  theme_bw()
 
-## ---- fig.width=7-------------------------------------------------------------
+## ----fig.width=7--------------------------------------------------------------
 years = 1987:2001
 Januarys = as.numeric(as.Date(paste(years, '-01-01', sep=''), origin='1970-01-01'))
 ggplot(CVDdaily, aes(x=as.numeric(date), y=cvd))+
@@ -28,14 +28,14 @@ ggplot(CVDdaily, aes(x=as.numeric(date), y=cvd))+
  theme_bw()+
  theme(panel.grid.minor = element_blank())
 
-## ---- fig.width=6-------------------------------------------------------------
+## ----fig.width=6--------------------------------------------------------------
 ggplot(CVDdaily, aes(x=tmpd, y=cvd))+
  geom_point()+
  ylab('Daily number of CVD deaths')+
  xlab('Temperature (degrees F)')+
  theme_bw()
 
-## ---- warning=FALSE, message=FALSE--------------------------------------------
+## ----warning=FALSE, message=FALSE---------------------------------------------
 # make a spline basis that has a lag and is non-linear
 tmpd.basis = crossbasis(CVDdaily$tmpd, lag=14, # 14 day lag
                 arglag=list(fun='ns', df=3), # 3 degrees of freedom for lag; ns = natural spline
@@ -51,7 +51,7 @@ summary(model)
 ## -----------------------------------------------------------------------------
 confint(model$c.model)
 
-## ---- fig.height=5, fig.width=5-----------------------------------------------
+## ----fig.height=5, fig.width=5------------------------------------------------
 # extract the coefficients and variance--covariance matrix for the spline terms
 coef = coefficients(model$c.model)
 index = names(coef) %in% spline.names
@@ -61,7 +61,7 @@ for.plot = crosspred(basis=tmpd.basis, coef=coef, vcov=vcov, at=seq(45, 85, 1), 
 par(mai=c(0.2, 0, 0, 0)) # reduce plot margins
 plot(for.plot, xlab='Temperature (degrees F)', zlab='Odds ratio', ylab='Lag (days)')
 
-## ---- fig.width=5-------------------------------------------------------------
+## ----fig.width=5--------------------------------------------------------------
 to.plot = data.frame(temperature = for.plot$predvar, 
                      mean = for.plot$allRRfit,
                      lower = for.plot$allRRlow,
@@ -74,7 +74,21 @@ ggplot(data=to.plot, aes(x=temperature, y=mean, ymin=lower, ymax=upper))+
   ylab('Odds ratio')+
   theme_bw()
 
-## ---- fig.width=7, warning=FALSE----------------------------------------------
+## ----fig.width=5--------------------------------------------------------------
+for.plot = crosspred(basis=tmpd.basis, coef=coef, vcov=vcov, at=80, lag=c(0,14), model.link = 'log', cen=70)
+to.plot = data.frame(lag = for.plot$lag[1]:for.plot$lag[2],
+                     mean = as.numeric(for.plot$matRRfit),
+                     lower = as.numeric(for.plot$matRRlow),
+                     upper = as.numeric(for.plot$matRRhigh))
+ggplot(data=to.plot, aes(x=lag, y=mean, ymin=lower, ymax=upper))+
+  geom_hline(lty=2, yintercept = 1)+ # horizontal reference line at no change in odds
+  geom_ribbon(alpha=0.3)+
+  geom_line()+
+  xlab('Lag (days)')+
+  ylab('Odds ratio')+
+  theme_bw()
+
+## ----fig.width=7, warning=FALSE-----------------------------------------------
 set.seed(1234) # set the random seed to give repeatable results
 data(CVD)
 f = c(12) # a single twelve month cycle
@@ -94,7 +108,7 @@ set.seed(1234) # set the random seed to give repeatable results
 ntest.residuals = nonlintest(ns.season$residuals, n.lag=12, n.boot=500)
 ntest.residuals
 
-## ---- warnings=FALSE, fig.width=5, fig.height=5-------------------------------
+## ----warnings=FALSE, fig.width=5, fig.height=5--------------------------------
 plot = plot(ntest.residuals, plot=FALSE)
 plot + scale_x_continuous(breaks = 0:12) +
   scale_y_continuous(breaks = 0:12) +

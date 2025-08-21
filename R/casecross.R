@@ -46,11 +46,11 @@
 #' number of available controls will become too small, which in turn means the
 #' number of case days with at least one control day is compromised.
 #' 
-#' The method uses conditional logistic regression (see \code{\link{coxph}} and
-#' so the parameter estimates are odds ratios.)
+#' The method uses conditional logistic regression (see \code{\link[survival:coxph]{coxph}} and
+#' so the parameter estimates are odds ratios.) 
 #' 
 #' The code assumes that the data frame contains a date variable (in
-#' \code{\link{Date}} format) called \sQuote{date}.
+#' \code{\link[base:Date]{Date}} format) called \sQuote{date}.
 #' 
 #' @param formula formula. The dependent variable should be an integer count
 #' (e.g., daily number of deaths).
@@ -107,7 +107,7 @@ casecross = function(formula, data, exclusion = 2, stratalength = 28,
  outcome  =  dow  =  case  = timex  =  dow.x  =  dow.y  =  matchday.x  =  matchday.y  =  windownum.x  =  windownum.y  =  NULL # Setting some variables to NULL first (for R CMD check)
  thisdata = data
  ## Checks
- if (class(thisdata$date)!= "Date"){
+ if (is(thisdata$date, "Date") == FALSE){
   stop("date variable must be in date format, see ?Dates")}
  if (exclusion<0){stop("Minimum value for exclusion is zero")}
  parts = paste(formula)

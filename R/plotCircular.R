@@ -43,9 +43,9 @@
 #' variable, default:FALSE
 #' @param legend whether to include legend or not, default:TRUE when plotting
 #' two variables
-#' @param auto.legend list of parameters for legend, see \code{\link{legend}}
-#' @param \dots additional arguments to \code{\link{plot}} and/or
-#' \code{\link{legend}}. See \code{\link{par}} for more details
+#' @param auto.legend list of parameters for legend, see \code{\link[graphics:legend]{legend}}
+#' @param \dots additional arguments to \code{\link[base:plot]{plot}} and/or
+#' \code{\link[graphics:legend]{legend}}. See \code{\link[graphics:par]{par}} for more details
 #' @author Adrian Barnett \email{a.barnett@qut.edu.au}
 #' @references Fisher, N.I. (1993) \emph{Statistical Analysis of Circular
 #' Data}. Cambridge University Press, Cambridge.
@@ -68,7 +68,7 @@
 #'   main="Observed and Expected AFL players")
 #' }
 #' 
-#' @export 
+#' @noRd 
 plotCircular<-function(area1,area2=NULL,spokes=NULL,
                        scale=0.8,labels,stats=TRUE,dp=1,
                        clockwise=TRUE,spoke.col='black',lines=FALSE,
